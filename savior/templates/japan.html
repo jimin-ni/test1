@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>일본 상세페이지</title>
+  </head>
+  <body>
+    <a href="{% url 'savior:main' %}">뒤로가기</a><br>
+    실시간 환율: {{ exchange_rate }}엔 <br>
+    <a href="{% url 'savior:japan_exchange' %}">환율계산기</a>
+  </body>
+</html>
