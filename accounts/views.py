@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm, UserCreateForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 
 
 def signup_view(request):
@@ -45,3 +45,13 @@ def login_view(request):
             # 비즈니스 로직 처리 - 로그인 실패 (false)
             # form = AuthenticationForm(request.POST)
             return render(request, './login.html', {'form':form})
+
+#* 로그아웃
+def logout_view(request):
+    # 데이터유효성 검사
+    if request.user.is_authenticated:
+    # 비즈니스 로직 처리 - 로그아웃
+        logout(request)
+    # 응답 (main 화면으로 이동)
+    return redirect('savior:main')
+    
