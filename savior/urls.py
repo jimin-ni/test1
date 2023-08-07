@@ -14,4 +14,7 @@ urlpatterns = [
     
     #* 로그인 및 회원가입
     path('accounts/', include('accounts.urls', namespace='accounts' )),
+    
+    #* 마이페이지 
+    path('mypage/', views.mypage, name='mypage'),
 ]

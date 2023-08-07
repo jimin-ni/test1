@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mypage</title>
+</head>
+<body>
+{% block content %}
+
+    <!--! 로그인, 회원가입, 로그아웃 -->
+    <!--* 로그인 사용자 이름(id) 확인 -->
+    {% if request.user.is_authenticated %}
+        <span>로그인 계정 이름 : {{ request.user.username }}</span><br><br><br>
+    {% else %}
+        <span>먼저 로그인 해주세요 </span><br>
+
+        <!--* 로그아웃 버튼 -->
+        <a href="{% url 'savior:accounts:login' %}">로그인</a><br><br><br>
+    {% endif %}
+
+{% endblock %}
+</body>
+</html>

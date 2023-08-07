@@ -164,3 +164,7 @@ def vietnam_exchange(request):
         return render(request,'vietnam_exchange.html',{'VND':VND,'KRW':KRW})
     else:
         return render(request, 'vietnam_exchange.html')
+
+#임시 마이페이지
+def mypage(request):
+    return render(request, "mypage.html")

@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm, UserCreateForm
 from django.contrib.auth import login, logout
 
-
+#* 회원가입
 def signup_view(request):
     # GET 요청시 html 응답
     if request.method == 'GET':
