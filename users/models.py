@@ -29,8 +29,9 @@ class UserManager(DjangoUserManager):
         extra_fields.setdefault('is_superuser', True)
         return self._create_user(username, email, password=password, **extra_fields)
         
-# custom user model
 class User(AbstractUser):
     # email = models.EmailField(verbose_name='이메일')
     nickname = models.CharField(verbose_name='닉네임', max_length=10)
     objects = UserManager()     # 생성한 UserManager 클래스 적용
+    
+#* 
