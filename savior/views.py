@@ -3,6 +3,8 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import cloudscraper
+import requests
+import json
 # Create your views here.
 
 #임시용 메인페이지
@@ -12,7 +14,29 @@ def main(request):
 #일본 상세페이지
 def japan(request):
     exchange_rate = get_exchange_rate1()
-    return render(request, "japan.html", {'exchange_rate': exchange_rate})
+    clouds_info, icon_info, temperature = japan_weather()
+    context = {
+        'clouds_info': clouds_info,
+        'icon_info': icon_info,
+        'temperature': temperature,
+        'exchange_rate': exchange_rate,
+    }
+    return render(request, "japan.html", context)
+
+#일본 날씨
+def japan_weather():
+    city = "Tokyo"
+    apikey = "1a34ea4698296cf6cb4bb168b8356219"
+    lang = "kr"
+    api = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={apikey}&lang={lang}&units=metric"
+    result = requests.get(api)
+    data = json.loads(result.text)
+
+    clouds_info = data.get('weather', [{'main': 'N/A'}])[0]['main']  # 하늘 상태
+    icon_info = data.get('weather', [{'icon': 'N/A'}])[0]['icon']  # 아이콘
+    temperature = data.get('main', {'temp': 'N/A'})['temp']  # 기온
+
+    return clouds_info, icon_info, temperature
 
 #일본 환율계산기
 def get_exchange_rate1():
@@ -48,7 +72,29 @@ def japan_exchange(request):
 #미국 상세페이지
 def USA(request):
     exchange_rate = get_exchange_rate2()
-    return render(request, "USA.html", {'exchange_rate': exchange_rate})
+    clouds_info, icon_info, temperature = USA_weather()
+    context = {
+        'clouds_info': clouds_info,
+        'icon_info': icon_info,
+        'temperature': temperature,
+        'exchange_rate': exchange_rate,
+    }
+    return render(request, "USA.html", context)
+
+#미국 날씨
+def USA_weather():
+    city = "Washington D.C."
+    apikey = "1a34ea4698296cf6cb4bb168b8356219"
+    lang = "kr"
+    api = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={apikey}&lang={lang}&units=metric"
+    result = requests.get(api)
+    data = json.loads(result.text)
+
+    clouds_info = data.get('weather', [{'main': 'N/A'}])[0]['main']  # 하늘 상태
+    icon_info = data.get('weather', [{'icon': 'N/A'}])[0]['icon']  # 아이콘
+    temperature = data.get('main', {'temp': 'N/A'})['temp']  # 기온
+
+    return clouds_info, icon_info, temperature
 
 #미국 환율계산기
 def get_exchange_rate2():
@@ -84,7 +130,29 @@ def USA_exchange(request):
 #베트남 상세페이지
 def vietnam(request):
     exchange_rate = 5.47
-    return render(request, "vietnam.html", {'exchange_rate': exchange_rate})
+    clouds_info, icon_info, temperature = vietnam_weather()
+    context = {
+        'clouds_info': clouds_info,
+        'icon_info': icon_info,
+        'temperature': temperature,
+        'exchange_rate': exchange_rate,
+    }
+    return render(request, "vietnam.html", context)
+
+#베트남 날씨
+def vietnam_weather():
+    city = "Hanoi"
+    apikey = "1a34ea4698296cf6cb4bb168b8356219"
+    lang = "kr"
+    api = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={apikey}&lang={lang}&units=metric"
+    result = requests.get(api)
+    data = json.loads(result.text)
+
+    clouds_info = data.get('weather', [{'main': 'N/A'}])[0]['main']  # 하늘 상태
+    icon_info = data.get('weather', [{'icon': 'N/A'}])[0]['icon']  # 아이콘
+    temperature = data.get('main', {'temp': 'N/A'})['temp']  # 기온
+
+    return clouds_info, icon_info, temperature
 
 #베트남 환율계산기
 def vietnam_exchange(request):
