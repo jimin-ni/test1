@@ -1,0 +1,24 @@
+<!--* 회원가입 페이지  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+</head>
+<body>
+    {% block content %}
+    <h1>회원가입 페이지</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {{ form.as_p }}
+        <div>
+            <input type="submit">
+        </div>
+    </div>
+</form>
+{% endblock %}
+</body>
+</html>
+	
