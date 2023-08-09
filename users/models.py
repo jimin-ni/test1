@@ -34,4 +34,3 @@ class User(AbstractUser):
     nickname = models.CharField(verbose_name='닉네임', max_length=10)
     objects = UserManager()     # 생성한 UserManager 클래스 적용
     
-#* 

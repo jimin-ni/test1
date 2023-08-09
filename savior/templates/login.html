@@ -5,20 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
-    {% block content %}
+{% block content %}
 
 </head>
 <body>
     <h1>로그인 페이지</h1>
     <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <div>
-        {{ form.as_p }}
         <div>
-            <input type="submit">
+            {{ form.as_p }}
+            <div>
+                <input type="submit">
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+    <a href="{% url 'savior:accounts:password_reset' %}">비밀번호 찾기</a>
+
 {% endblock %}
 </body>
 </html>

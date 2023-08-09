@@ -171,3 +171,13 @@ EMAIL_USE_TLS = True
 
 # 사이트와 관련한 자동응답을 받을 이메일 주소
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#* 카카오 로그인 
+KAKAO_CONFIG = {
+    "KAKAO_REST_API_KEY": "190d42e2a674395e7a82755e907fcba9",   
+    "KAKAO_REDIRECT_URI": "http://localhost:8000/accounts/kakao/login/callback/",
+    "KAKAO_CLIENT_SECRET_KEY": "58aYr20LxBJuTFqW4yZbeAMWLqAnXMdx", 
+}
+KAKAO_REST_API_KEY= "190d42e2a674395e7a82755e907fcba9"
+KAKAO_REDIRECT_URI= "http://localhost:8000/accounts/kakao/login/callback/"
+KAKAO_CLIENT_SECRET_KEY= "58aYr20LxBJuTFqW4yZbeAMWLqAnXMdx"
