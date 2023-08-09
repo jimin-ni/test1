@@ -13,13 +13,14 @@
     {% if request.user.is_authenticated %}
         <span>로그인 계정 이름 : {{ request.user.username }}</span><br><br><br>
     {% else %}
-        <span>먼저 로그인 해주세요 </span><br><br><br>
+        <span>먼저 로그인 하세요 </span><br><br><br>
     {% endif %}
 
     <!--* 로그인, 로그아웃, 회원가입 버튼 -->
     {% if request.user.is_authenticated %}
         <a href="{% url 'savior:accounts:logout' %}">로그아웃</a><br><br><br>
     {% else %}
+        <!-- <a href="{% url 'savior:accounts:login' %}">로그인</a> -->
         <a href="{% url 'savior:accounts:login' %}">로그인</a>
         <a href="{% url 'savior:accounts:signup' %}">회원가입</a><br><br><br>
     {% endif %}
