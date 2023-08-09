@@ -1,6 +1,8 @@
 from pathlib import Path
-import os
+import os, json
 from django.urls import reverse_lazy
+import socket
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -11,7 +13,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-57^tohc!v_cbvfwndk#!)=t-9)1)cd40!@1^i69z3%#@28%(=y'
+# secrets.json 파일에 넣었음
+
+
+#* secrets 파일 불러오기
+secret_file = os.path.join(BASE_DIR, 'secrets.json')
+
+#* You're accessing the development server over HTTPS, but it only supports HTTP. 오류 해결
+if socket.gethostname()=="Raouf-PC":
+    from local_settings import *
+
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+SECRET_KEY = get_secret("SECRET_KEY")
+
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -22,6 +48,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -29,7 +56,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'savior',
-    'users',
     'accounts',
 ]
 
@@ -120,20 +146,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # 커스텀된 user 
 AUTH_USER_MODEL = 'users.User'
 
-#* 이메일 비밀번호 재설정
+# #* 이메일 비밀번호 재설정
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # 메일을 보내는 호스트 서버
 EMAIL_HOST = 'smtp.gmail.com'
 
-# ENAIL_HOST에 정의된 SMTP 서버가 사용하는 포트 (587: TLS/STARTTLS용 포트)
+# ENAIL_HOST에 정의된 SMTP 서버가 사용하는 포트 gmail 용(587: TLS/STARTTLS용 포트)
 EMAIL_PORT = '587'
 
 #  발신할 이메일 주소 '~@gmail.com'  (숨겨야 하는 값이기에 env로 표현)
-EMAIL_HOST_USER = 'EMAIL_HOST_USER'
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER")
 
 # 발신할 이메일 비밀번호 (2단계 인증일경우 앱 비밀번호)
-EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
+# EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+
+# 발신 메일 내용 https로 바꾸기
+# SECURE_SSL_REDIRECT = True
+
 
 # TLS 보안 방법 (SMPT 서버와 통신할 떄 TLS (secure) connection 을 사용할지 말지 여부)
 EMAIL_USE_TLS = True
