@@ -30,7 +30,9 @@ urlpatterns = [
     path('password_reset_<uidb64>_<token>/', auth_views.PasswordResetConfirmView.as_view(
         template_name='./password_reset_confirm.html',
         success_url=reverse_lazy('savior:accounts:password_reset_complete')
-    ), name='password_reset_confirm'),
+        ), 
+        name='password_reset_confirm'),
+        # name='savior:accounts:password_reset_confirm'),
     
     # 비밀번호 재설정 완료 후 페이지
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(
