@@ -6,7 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    의류<br>
+    <a href="{% url 'savior:japan' %}">뒤로가기</a><br><br>
+
+    일본 잡화<br><br>
     
+    <div>
+        <form method="GET">
+            <input type="text" autocomplete="off" name="keyword">
+            <button type="submit">검색</button>
+        </form>
+    </div><br><br>
+
+    {% for other in others %}
+        <div>
+            {{ other.japan_others }}
+        </div>
+    {% endfor %}
 </body>
 </html>

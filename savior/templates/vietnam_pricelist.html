@@ -7,8 +7,8 @@
 </head>
 <body>
     <h2>주요 물품의 시세</h2>
-    일본<br><br>
-
+    베트남<br><br>
+    
     <form action="{% url 'savior:pricelist' %}" method="POST">
         {% csrf_token %}
         <select name="country"> 
@@ -20,8 +20,8 @@
         <input type="submit" value="선택">
     </form>
     <br>
-    <a href="{% url 'savior:japan_clothes' %}">의류</a><br>
-    <a href="{% url 'savior:japan_foods' %}">음식</a><br>
-    <a href="{% url 'savior:japan_others' %}">잡화</a><br>
+    <a href="{% url 'savior:vietnam_clothes' %}">의류</a><br>
+    <a href="{% url 'savior:vietnam_foods' %}">음식</a><br>
+    <a href="{% url 'savior:vietnam_others' %}">잡화</a><br>
 </body>
 </html>
