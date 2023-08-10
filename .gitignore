@@ -1,5 +1,5 @@
 # .pyc, db.sqlite3은 깃허브에 push하면 오류가 발생
-*.pyc
-db.sqlite3
+# *.pyc
+# db.sqlite3
 #* 계정 명 및 비밀번호가 들어있어 github에 공유하지 말아야 할 정보
 secrets.json
