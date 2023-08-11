@@ -3,6 +3,12 @@ from django.contrib import messages
 from .exception import KakaoException, SocialLoginException
 from django.conf import settings
 import requests
+from .models import models
+from .models import User
+from django.utils.text import slugify
+from django.contrib.auth import login
+
+
 
 #* 카카오 로그인 
 def kakao_login(request):
@@ -86,25 +92,34 @@ def kakao_login_callback(request):
             headers=headers,
         )
         profile_json = profile_request.json()
-        # kakao_account = profile_json.get("kakao_account.")
-        kakao_account = profile_json.get("kakao_account.profile")
+        kakao_account = profile_json.get("kakao_account")
         profile = kakao_account.get("profile")
-
-        nickname = profile.get("nickname", None)
+        
+        # nickname = profile.get("nickname", None) #! profile 변수가 none 이라고 인식해 get() 메서드 호출 불가 오류
+        # nickname = kakao_account.get("nickname", None) #! 위에 오류 해결해보려고 
+        nickname = kakao_account.get("profile_nickname", None) #! ID 값을 카카오개발자 문서에 작성된 것으로 수정
         # avatar_url = profile.get("profile_image_url", None)
-        email = kakao_account.get("email", None)
+        
+        # email = kakao_account.get("email", None)
+        email = kakao_account.get("account_email", None)    #! ID 값을 카카오개발자 문서에 작성된 것으로 수정
         # gender = kakao_account.get("gender", None)
 
-        user = models.User.objects.get_or_none(email=email)
+#kakao로 로그인을 하려는 user의 이메일 계정이 이미 회원가입이 되었는지를 확인
+        # # user = models.User.objects.get_or_none(email=email) 
+        user = User.objects.get_or_none(email=email) #* 커스텀된 User 모델 이용
         if user is not None:
             if user.login_method != models.User.LOGIN_KAKAO:
                 raise GithubException(f"Please login with {user.login_method}")
         else:
-            user = models.User.objects.create_user(
+            # user = models.User.objects.create_user(
+            user = User.objects.create_user(
                 email=email,
-                username=email,
-                first_name=nickname,
-                login_method=models.User.LOGIN_KAKAO,
+                # email=slugify(email),
+                # username=email,
+                username=slugify(nickname),  # 카카오 닉네임을 slugify하여 username으로 사용
+                first_name=slugify(nickname),   #  NOT NULL constraint failed 오류 발생으로 sluglify 함수이용
+                # login_method=models.User.LOGIN_KAKAO,
+                login_method=User.LOGIN_KAKAO,
             )
 
             # if avatar_url is not None:
@@ -112,10 +127,12 @@ def kakao_login_callback(request):
             #     user.avatar.save(
             #         f"{nickname}-avatar", ContentFile(avatar_request.content)
             #     )
-            user.set_unusable_password()
+            user.set_unusable_password()        #kakao의 id와 password를 이용, password 설정 안 함
             user.save()
-        messages.success(request, f"{user.email} signed up and logged in with Kakao")
-        login(request, user)
+            
+        # messages.success(request, f"{user.email} signed up and logged in with Kakao")
+        messages.success(request, "you are signed up and logged in with Kakao")
+        login(request, user)    # 로그인 처리
         return redirect(reverse("core:home"))
     except KakaoException as error:
         messages.error(request, error)
