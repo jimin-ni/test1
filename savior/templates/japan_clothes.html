@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'savior:japan' %}">뒤로가기</a><br><br>
+
+    일본 의류<br><br>
+    
+    <div>
+        <form method="GET">
+            <input type="text" autocomplete="off" name="keyword">
+            <button type="submit">검색</button>
+        </form>
+    </div><br><br>
+
+    {% for j_clothes in clothes %}
+        <div>
+            {{ j_clothes.japan_clothes }}
+        </div>
+    {% endfor %}
+</body>
+</html>
