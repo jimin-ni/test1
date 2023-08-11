@@ -17,4 +17,7 @@ urlpatterns = [
 
     #* 마이페이지 
     path('mypage/', views.mypage, name='mypage'),
+    
+    #* 카카오 로그인
+    path('users/', include('users.urls', namespace='users'))
 ]

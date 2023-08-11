@@ -1,4 +1,5 @@
 from django.urls import path, include
+# from .views import signup_view, login_view, logout_view, kakao_login, kakao_callback
 from .views import signup_view, login_view, logout_view
 from django.contrib.auth import views as auth_views
 from django.urls import reverse, reverse_lazy
@@ -38,4 +39,8 @@ urlpatterns = [
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='./password_reset_complete.html'
     ), name='password_reset_complete'),
+    
+    #* 카카오 로그인 
+    # path('kakao/login/callback', kakao_login),
+    # path('kakao/', kakao_callback)
 ]

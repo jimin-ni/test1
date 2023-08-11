@@ -33,4 +33,16 @@ class User(AbstractUser):
     # email = models.EmailField(verbose_name='이메일')
     nickname = models.CharField(verbose_name='닉네임', max_length=10)
     objects = UserManager()     # 생성한 UserManager 클래스 적용
+
+# 카카오 로그인 과정에서 참고 
+    LOGIN_KAKAO = "kakao"
+    LOGIN_EMAIL = "email"
+
+    LOGIN_CHOICES = (
+        (LOGIN_EMAIL, "Email"),
+        (LOGIN_KAKAO, "Kakao"),
+    )    
     
+    login_method = models.CharField(
+        max_length=6, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
+    )

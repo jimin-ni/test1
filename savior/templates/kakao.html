@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오 로그인하기</title>
+</head>
+<body>
+
+    {% block content %}
+
+    <h1>카카오 로그인 </h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div>
+            {{ form.as_p }}
+            <div>
+                <input type="submit">
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+    <div class="button-login" align ="center" >
+        <a id="kakao-login-btn" >
+        <img src="//k.kakaocdn.net/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="83%" height ="50px" />
+</a>
+    </div>
+
+
+
+    <script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script type='text/javascript'>
+        Kakao.init('190d42e2a674395e7a82755e907fcba9');
+        
+        
+        $("#kakao-login-btn").on("click", function(){
+            //1. 로그인 시도
+            Kakao.Auth.login({
+                success: function(authObj) {
+                 
+                  //2. 로그인 성공시, API 호출
+                  Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function(res) {
+                      console.log(res);
+                      var id = res.id;
+                      scope : 'account_email';
+                    alert('로그인성공');
+                      location.href="../templates/main.html";
+                
+        
+                      
+                }
+                  })
+                  console.log(authObj);
+                  var token = authObj.access_token;
+                },
+                fail: function(err) {
+                  alert(JSON.stringify(err));
+                }
+              });
+                
+        }) //
+        
+        
+        </script>
+</body>
+
+
+</html>
