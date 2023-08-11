@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {width: 100px; height: 100px;}
+    </style>
+</head>
+<body>
+    <a href="{% url 'savior:main' %}">뒤로가기</a>
+    <br>
+    <h1>자유게시판</h1><br>
+    <hr>
+    {% for post in posts %}
+        <a href="{% url 'savior:community_detail' post.pk %}">{{post.title}}</a><br>
+        {{ post.user.username }}<br>
+        {% if post.thumbnail %}
+            <img src="{{post.thumbnail.url}}" alt="">
+        {% else %}
+            <img src="" alt="">
+        {% endif %}
+        <br><br>
+    {% endfor %}
+    <br><br><br>
+    <a href="{% url 'savior:community_post' %}"><button>글쓰기</button></a>
+</body>
+</html>

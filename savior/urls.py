@@ -1,5 +1,7 @@
 from django.urls import path, include
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name='savior'
 
@@ -34,4 +36,15 @@ urlpatterns = [
 
     #* 마이페이지 
     path('mypage/', views.mypage, name='mypage'),
+
+    #커뮤니티
+    path('community/', views.community, name='community'),
+    path('community_post/', views.community_post, name='community_post'),
+    path('community_detail/<int:id>', views.community_detail, name='community_detail'),
+    path('community_delete/<int:id>', views.community_delete, name='community_delete'),
 ]
+
+urlpatterns += static(
+    prefix=settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT,
+)
