@@ -44,33 +44,6 @@ def kakao_login_callback(request):
         # client_secret = os.environ.get("KAKAO_SECRET")
         client_secret = settings.KAKAO_SECRET
         
-        
-        # access_token 발급 요청
-        # code = data.get('code')
-        # if not code:
-        #     return Response(status=status.HTTP_400_BAD_REQUEST)
-
-        # request_data = {
-        #     'grant_type': 'authorization_code',
-        #     'client_id': settings.KAKAO_REST_API_KEY,
-        #     'redirect_uri': settings.KAKAO_REDIRECT_URI,
-        #     'client_secret': settings.KAKAO_CLIENT_SECRET_KEY,
-        #     'code': code,
-        # }
-        # token_headers = {
-        #     'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-        # }
-        # token_res = requests.post(kakao_token_uri, data=request_data, headers=token_headers)
-
-        # token_json = token_res.json()
-        # access_token = token_json.get('access_token')
-
-        # if not access_token:
-        #     return Response(status=status.HTTP_400_BAD_REQUEST)
-        # access_token = f"Bearer {access_token}"  # 'Bearer ' 마지막 띄어쓰기 필수
-
-        
-        
         # token
         request_access_token = requests.post(
             f"https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id={client_id}&redirect_uri={redirect_uri}&code={code}&client_secret={client_secret}",
@@ -122,7 +95,7 @@ def kakao_login_callback(request):
                 login_method=User.LOGIN_KAKAO,
             )
 
-            # if avatar_url is not None:
+            # if avatar_url is not None: #* 이미지 및 프로필 사진에 대한 것 
             #     avatar_request = requests.get(avatar_url)
             #     user.avatar.save(
             #         f"{nickname}-avatar", ContentFile(avatar_request.content)
