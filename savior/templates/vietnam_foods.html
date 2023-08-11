@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'savior:vietnam' %}">뒤로가기</a><br><br>
+
+    베트남 음식<br><br>
+    
+    <div>
+        <form method="GET">
+            <input type="text" autocomplete="off" name="keyword">
+            <button type="submit">검색</button>
+        </form>
+    </div><br><br>
+
+    {% for food in foods %}
+        <div>
+            {{ food.vietnam_foods }}
+        </div>
+    {% endfor %}
+</body>
+</html>

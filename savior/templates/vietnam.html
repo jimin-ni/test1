@@ -6,16 +6,18 @@
     <title>베트남 상세페이지</title>
 </head>
 <body>
-    <a href="{% url 'savior:main' %}">뒤로가기</a><br>
+    <a href="{% url 'savior:main' %}">뒤로가기</a><br><br>
     실시간 환율: {{ exchange_rate }}동 <br>
-    <a href="{% url 'savior:vietnam_exchange' %}">환율계산기</a><br>
+    <a href="{% url 'savior:vietnam_exchange' %}">환율계산기</a><br><br>
     <span>
         하노이 날씨 정보<br>
-        하늘: {{ clouds_info }}
         기온: {{ temperature }}°C
         아이콘: {{ icon_info }}
         <!-- https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
             프론트 분이 아이콘 정보에 따른 사진 처리해주시면 될 거 같아요! -->
-    </span>
+    </span><br><br>
+    <a href="{% url 'savior:vietnam_clothes' %}">의류</a><br>
+    <a href="{% url 'savior:vietnam_foods' %}">음식</a><br>
+    <a href="{% url 'savior:vietnam_others' %}">잡화</a><br>
 </body>
 </html>
