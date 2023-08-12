@@ -177,11 +177,17 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 #* 카카오 로그인 
-KAKAO_CONFIG = {
-    "KAKAO_REST_API_KEY": "190d42e2a674395e7a82755e907fcba9",   
-    "KAKAO_REDIRECT_URI": "http://localhost:8000/accounts/kakao/login/callback/",
-    "KAKAO_CLIENT_SECRET_KEY": "58aYr20LxBJuTFqW4yZbeAMWLqAnXMdx", 
-}
-KAKAO_REST_API_KEY= "190d42e2a674395e7a82755e907fcba9"
-KAKAO_REDIRECT_URI= "http://localhost:8000/accounts/kakao/login/callback/"
-KAKAO_CLIENT_SECRET_KEY= "58aYr20LxBJuTFqW4yZbeAMWLqAnXMdx"
+# KAKAO_CONFIG = {
+#     "KAKAO_REST_API_KEY": "190d42e2a674395e7a82755e907fcba9",   
+#     # "KAKAO_REDIRECT_URI": "http://localhost:8000/accounts/kakao/login/callback/",
+#     "KAKAO_CLIENT_SECRET_KEY": "58aYr20LxBJuTFqW4yZbeAMWLqAnXMdx", 
+# }
+
+# KAKAO_REST_API_KEY= "190d42e2a674395e7a82755e907fcba9"
+# # KAKAO_REDIRECT_URI= "http://localhost:8000/accounts/kakao/login/callback/"
+# KAKAO_REDIRECT_URI= "http://127.0.0.1:8000/accounts/kakao/login/callback"
+# KAKAO_CLIENT_SECRET_KEY= "58aYr20LxBJuTFqW4yZbeAMWLqAnXMdx"
+
+KAKAO_REST_API_KEY="190d42e2a674395e7a82755e907fcba9" # 앱 생성시 발급받은 rest api
+KAKAO_ID="190d42e2a674395e7a82755e907fcba9" # 앱 생성시 발급받은 rest api
+KAKAO_SECRET="58aYr20LxBJuTFqW4yZbeAMWLqAnXMdx" # client secret key
