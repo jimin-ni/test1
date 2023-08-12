@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
+from users.models import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 import pandas as pd
@@ -288,3 +290,45 @@ def vietnam_exchange(request):
 #임시 마이페이지
 def mypage(request):
     return render(request, "mypage.html")
+
+#커뮤니티
+def community(request):
+    if not request.user.is_authenticated:
+        return redirect("'accounts:login'")
+    
+    posts = Post.objects.all()
+    context = {"posts": posts}
+    return render(request, "community.html", context)
+
+def community_post(request):
+    if request.method == 'POST':
+        title = request.POST["title"]
+        content = request.POST["content"]
+        thumbnail = request.FILES["thumbnail"]
+        post = Post.objects.create(
+            title=title,
+            content=content,
+            thumbnail=thumbnail,
+            user = request.user,
+        )
+        return redirect('savior:community')
+    return render(request, "community_post.html")
+
+@login_required
+def community_detail(request, id): 
+    post = get_object_or_404(Post, pk=id)
+    if request.method == "POST":
+        comment_content = request.POST["comment"]
+        Comment.objects.create(
+            post=post,
+            content=comment_content,
+            user=request.user,
+        )
+    return render(request, "community_detail.html", {"post":post})
+
+@login_required
+def community_delete(request, id): 
+    delete_post = get_object_or_404(Post, pk=id) 
+    if request.user == delete_post.user:
+        delete_post.delete()
+    return redirect('savior:community')
