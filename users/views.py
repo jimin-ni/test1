@@ -74,7 +74,7 @@ def kakao_login_callback(request):
         # avatar_url = profile.get("profile_image_url", None)
         
         # email = kakao_account.get("email", None)
-        email = kakao_account.get("account_email", None)    #! EMAIL 값을 카카오개발자 문서에 작성된 것으로 수정, 여전히 못 읽어옴
+        # email = kakao_account.get("account_email", None)    #! EMAIL 값을 카카오개발자 문서에 작성된 것으로 수정, 여전히 못 읽어옴
         email = kakao_account.get("account_email", "Null")    #! Email 못 읽으면 Null 로 입력하도록 설정 
         # gender = kakao_account.get("gender", None)
 
@@ -82,7 +82,8 @@ def kakao_login_callback(request):
         # # user = models.User.objects.get_or_none(email=email) 
         user = User.objects.get_or_none(email=email) #* 커스텀된 User 모델 이용
         if user is not None:
-            if user.login_method != models.User.LOGIN_KAKAO:
+            # if user.login_method != models.User.LOGIN_KAKAO:
+            if user.login_method != User.LOGIN_KAKAO:
                 raise GithubException(f"Please login with {user.login_method}")
         else:
             # user = models.User.objects.create_user(
@@ -107,10 +108,11 @@ def kakao_login_callback(request):
         # messages.success(request, f"{user.email} signed up and logged in with Kakao")
         messages.success(request, "you are signed up and logged in with Kakao")
         login(request, user)    # 로그인 처리
-        return redirect(reverse("core:home"))
+        return redirect(reverse('savior:main'))
     except KakaoException as error:
         messages.error(request, error)
-        return redirect(reverse("core:home"))
+        return redirect(reverse('savior:main'))
     except SocialLoginException as error:
         messages.error(request, error)
-        return redirect(reverse("core:home"))
+        return redirect(reverse('savior:main'))
+    
