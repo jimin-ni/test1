@@ -11,7 +11,10 @@
     {% block content %}
     <!--* 로그인 사용자 이름(id) 확인 -->
     {% if request.user.is_authenticated %}
-        <span>로그인 계정 이름 : {{ request.user.username }}</span><br><br><br>
+        <span>로그인 계정 username : {{ request.user.username }}</span><br><br><br>
+        <span>로그인 계정 email : {{ request.user.email }}</span><br><br><br>
+        <span>로그인 계정 nickname : {{ request.user.nickname }}</span><br><br><br>
+        <span>로그인 계정 name : {{ request.user.name }}</span><br><br><br>
     {% else %}
         <span>먼저 로그인 하세요 </span><br><br><br>
     {% endif %}
