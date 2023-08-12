@@ -8,6 +8,7 @@ app_name='savior'
 urlpatterns = [
     path('', views.main , name='main'),
     path('pricelist/', views.pricelist , name='pricelist'),
+    path('exchange/', views.exchange , name='exchange'),
 
     #일본
     path('japan/', views.japan , name='japan'),

@@ -7,11 +7,32 @@
 </head>
 <body>
 {% block content %}
+    <a href="{% url 'savior:main' %}">뒤로가기</a><br>
+    <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
 
     <!--! 로그인, 회원가입, 로그아웃 -->
     <!--* 로그인 사용자 이름(id) 확인 -->
     {% if request.user.is_authenticated %}
-        <span>로그인 계정 이름 : {{ request.user.username }}</span><br><br><br>
+        <span>{{ request.user.username }}님, 반갑습니다</span><br><br><br>
+        <!-- 스크랩한 국가 목록 -->
+        Countries<br><br>
+
+        <hr>
+
+        <!-- 내가 쓴 글 목록 -->
+        Posts<br><br>
+        {% for post in request.user.post_set.all %}
+            {{ post.created|date:"Y년 m월 d일 H:i" }}<br>
+            <a href="{% url 'savior:community_detail' post.id %}">{{ post.title }}</a><br><br>
+        {% endfor %}<hr>
+
+        <!-- 내가 쓴 댓글 목록 -->
+        Comments<br><br>
+        {% for comment in request.user.comment_set.all %}
+            {{ comment.created|date:"Y년 m월 d일 H:i" }}<br>
+            <a href="{% url 'savior:community_detail' comment.post.id %}">{{ comment.content }}</a><br><br>
+        {% endfor %}
+
     {% else %}
         <span>먼저 로그인 해주세요 </span><br>
 

@@ -99,6 +99,17 @@ def japan_weather():
     return clouds_info, icon_info, temperature
 
 #일본 환율계산기
+def exchange(request):
+    if request.method == 'POST':
+        country = request.POST.get('country')
+        if country=='japan':
+            return redirect('savior:japan_exchange')
+        elif country=='USA':
+            return redirect('savior:USA_exchange')
+        else:
+            return redirect('savior:vietnam_exchange')
+    return render(request, 'japan_exchange.html')
+
 def get_exchange_rate1():
     headers = {
         'User-Agent': 'Mozilla/5.0',
@@ -295,8 +306,7 @@ def mypage(request):
 #커뮤니티
 def community(request):
     if not request.user.is_authenticated:
-        return redirect("accounts:login")
-    
+        return redirect("savior:accounts:login")
     posts = Post.objects.all()
     context = {"posts": posts}
     return render(request, "community.html", context)
@@ -370,4 +380,4 @@ def likes(request, id):
         else:
             post.like_users.add(request.user)
         return redirect(reverse('savior:community_detail', args=[post.pk]))
-    return redirect('accounts:login')
+    return redirect("savior:accounts:login")
