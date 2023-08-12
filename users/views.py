@@ -74,7 +74,8 @@ def kakao_login_callback(request):
         # avatar_url = profile.get("profile_image_url", None)
         
         # email = kakao_account.get("email", None)
-        email = kakao_account.get("account_email", None)    #! ID 값을 카카오개발자 문서에 작성된 것으로 수정
+        email = kakao_account.get("account_email", None)    #! EMAIL 값을 카카오개발자 문서에 작성된 것으로 수정, 여전히 못 읽어옴
+        email = kakao_account.get("account_email", "Null")    #! Email 못 읽으면 Null 로 입력하도록 설정 
         # gender = kakao_account.get("gender", None)
 
 #kakao로 로그인을 하려는 user의 이메일 계정이 이미 회원가입이 되었는지를 확인

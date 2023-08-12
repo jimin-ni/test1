@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager as DjangoUserManager
+from savior.models import Post
 
 # 사용자의 확장 정보 
 # class UserInfo(models.Model):
