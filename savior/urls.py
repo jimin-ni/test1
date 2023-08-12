@@ -40,6 +40,7 @@ urlpatterns = [
     #커뮤니티
     path('community/', views.community, name='community'),
     path('community_post/', views.community_post, name='community_post'),
+    path('<int:id>/likes/', views.likes, name='likes'),
     path('community_detail/<int:id>', views.community_detail, name='community_detail'),
     path('community_delete/<int:id>', views.community_delete, name='community_delete'),
 ]

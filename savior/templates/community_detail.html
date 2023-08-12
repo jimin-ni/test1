@@ -17,9 +17,18 @@
     <p>{{post.created}}</p><br>
     {% if post.thumbnail %}
         <img src="{{post.thumbnail.url}}" alt="">
-    {% else %}
-        <img src="" alt="">
     {% endif %}<br><br>
+
+    <p>좋아요 개수: {{ post.like_users.count }}</p>
+    <form action="{% url 'savior:likes' post.pk %}" method='POST'>
+        {% csrf_token %}
+            {% if user in post.like_users.all %}
+                <input type="submit" value='좋아요 취소'>
+            {% else %}
+                <input type="submit" value='좋아요'>
+            {% endif %}
+    </form><br><br>
+    
 
     {% if user.is_authenticated and user == post.user %}
         <a href="{% url 'savior:community_delete' post.pk %}"><button>삭제</button></a>

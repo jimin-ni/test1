@@ -18,9 +18,8 @@
         {{ post.user.username }}<br>
         {% if post.thumbnail %}
             <img src="{{post.thumbnail.url}}" alt="">
-        {% else %}
-            <img src="" alt="">
-        {% endif %}
+        {% endif %}<br>
+        좋아요 개수: {{ post.like_users.count }}
         <br><br>
     {% endfor %}
     <br><br><br>

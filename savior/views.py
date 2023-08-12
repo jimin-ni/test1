@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from users.models import *
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -294,7 +295,7 @@ def mypage(request):
 #커뮤니티
 def community(request):
     if not request.user.is_authenticated:
-        return redirect("'accounts:login'")
+        return redirect("accounts:login")
     
     posts = Post.objects.all()
     context = {"posts": posts}
@@ -304,13 +305,20 @@ def community_post(request):
     if request.method == 'POST':
         title = request.POST["title"]
         content = request.POST["content"]
-        thumbnail = request.FILES["thumbnail"]
-        post = Post.objects.create(
-            title=title,
-            content=content,
-            thumbnail=thumbnail,
-            user = request.user,
-        )
+        thumbnail = request.FILES.get("thumbnail")
+        if thumbnail is None:
+            post = Post.objects.create(
+                title=title,
+                content=content,
+                user=request.user,
+            )
+        else:
+            post = Post.objects.create(
+                title=title,
+                content=content,
+                thumbnail=thumbnail,
+                user=request.user,
+            )
         return redirect('savior:community')
     return render(request, "community_post.html")
 
@@ -332,3 +340,14 @@ def community_delete(request, id):
     if request.user == delete_post.user:
         delete_post.delete()
     return redirect('savior:community')
+
+@login_required
+def likes(request, id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, pk=id)
+        if post.like_users.filter(pk=request.user.pk).exists():
+            post.like_users.remove(request.user)
+        else:
+            post.like_users.add(request.user)
+        return redirect(reverse('savior:community_detail', args=[post.pk]))
+    return redirect('accounts:login')
