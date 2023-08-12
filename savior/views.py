@@ -301,6 +301,19 @@ def community(request):
     context = {"posts": posts}
     return render(request, "community.html", context)
 
+def community_tag(request, tag_name):
+    try:
+        tag = HashTag.objects.get(name=tag_name)
+    except HashTag.DoesNotExist:
+        posts = Post.objects.none()
+    else:
+        posts = Post.objects.filter(tags=tag)
+    context = {
+        "tag_name": tag_name,
+        "posts": posts,
+    }
+    return render(request, "community_tag.html", context)
+
 def community_post(request):
     if request.method == 'POST':
         title = request.POST["title"]
@@ -319,6 +332,13 @@ def community_post(request):
                 thumbnail=thumbnail,
                 user=request.user,
             )
+        tag_string = request.POST.get("tags")
+        if tag_string:
+            tag_names = [tag_name.strip() for tag_name in tag_string.split(",")]
+            for tag_name in tag_names:
+                tag, _ = HashTag.objects.get_or_create(name=tag_name)
+                post.tags.add(tag)
+        url = reverse("savior:community") + f"#post-{post.id}"
         return redirect('savior:community')
     return render(request, "community_post.html")
 
