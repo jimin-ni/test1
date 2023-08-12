@@ -20,7 +20,7 @@
 
     {% for food in foods %}
         <div>
-            {{ food.usa_foods }}
+            <a href="{% url 'savior:USA_foods_detail' food.pk %}">{{ food.usa_foods }}</a><br>
         </div>
     {% endfor %}
 </body>

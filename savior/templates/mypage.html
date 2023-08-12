@@ -14,9 +14,10 @@
     <!--* 로그인 사용자 이름(id) 확인 -->
     {% if request.user.is_authenticated %}
         <span>{{ request.user.username }}님, 반갑습니다</span><br><br><br>
+
         <!-- 스크랩한 국가 목록 -->
         Countries<br><br>
-
+        
         <hr>
 
         <!-- 내가 쓴 글 목록 -->

@@ -20,7 +20,7 @@
 
     {% for v_clothes in clothes %}
         <div>
-            {{ v_clothes.vietnam_clothes }}
+            <a href="{% url 'savior:vietnam_clothes_detail' v_clothes.pk %}">{{ v_clothes.vietnam_clothes }}</a><br>
         </div>
     {% endfor %}
 </body>

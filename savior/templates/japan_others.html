@@ -20,7 +20,7 @@
 
     {% for other in others %}
         <div>
-            {{ other.japan_others }}
+            <a href="{% url 'savior:japan_others_detail' other.pk %}">{{ other.japan_others }}</a><br>
         </div>
     {% endfor %}
 </body>
