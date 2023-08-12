@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import *
 import admin_thumbnails
+from django.db.models import ManyToManyField
+from django.forms import CheckboxSelectMultiple
 
 # Register your models here.
 admin.site.register(Japan_clothes),
@@ -38,6 +40,9 @@ class PostAdmin(admin.ModelAdmin):
         CommentInLine,
         PostImageInLine,
     ]
+    formfield_overrides = {
+        ManyToManyField: {"widget":CheckboxSelectMultiple},
+    }
 
 @admin.register(PostImage)
 class PostImageAdmin(admin.ModelAdmin):
@@ -54,3 +59,7 @@ class CommentAdmin(admin.ModelAdmin):
         "post",
         "content",
     ]
+
+@admin.register(HashTag)
+class HashTagAdmin(admin.ModelAdmin):
+    pass

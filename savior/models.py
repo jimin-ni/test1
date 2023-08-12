@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import *
+from django.conf import settings
 
 # Create your models here.
 
@@ -68,10 +69,12 @@ class Post(models.Model):
         verbose_name="작성자",
         on_delete=models.CASCADE,
     )
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_posts')
     title = models.CharField("제목", max_length=30, default='')
     content = models.TextField("내용")
     created = models.DateTimeField("생성일시", auto_now_add=True)
     thumbnail = models.ImageField("썸네일 이미지", upload_to="post", blank=True)
+    tags = models.ManyToManyField('HashTag', verbose_name='해시태그 목록', blank=True)
 
 class PostImage(models.Model):
     post = models.ForeignKey(
@@ -90,3 +93,11 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, verbose_name="포스트", on_delete=models.CASCADE)
     content = models.TextField("내용")
     created = models.DateTimeField("생성일시", auto_now_add=True)
+
+class HashTag(models.Model):
+    name = models.CharField("태그명", max_length=20)
+
+    def __str__(self):
+        return self.name
+    
+
