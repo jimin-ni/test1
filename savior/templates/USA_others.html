@@ -6,7 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="{% url 'savior:USA' %}">뒤로가기</a><br><br>
+    <a href="{% url 'savior:USA' %}">뒤로가기</a><br>
+    <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
 
     미국 잡화<br><br>
     
@@ -19,7 +20,7 @@
 
     {% for other in others %}
         <div>
-            {{ other.usa_others }}
+            <a href="{% url 'savior:USA_others_detail' other.pk %}">{{ other.usa_others }}</a><br>
         </div>
     {% endfor %}
 </body>

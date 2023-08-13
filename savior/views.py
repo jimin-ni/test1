@@ -3,6 +3,7 @@ from .models import *
 from users.models import *
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 import pandas as pd
@@ -29,7 +30,7 @@ def pricelist(request):
             return redirect('savior:vietnam_pricelist')
     return render(request, 'japan_pricelist.html')
 
-def USA_pricelist(request):
+def usa_pricelist(request):
     return render(request, 'USA_pricelist.html')
 
 def japan_pricelist(request):
@@ -61,6 +62,21 @@ def japan_clothes(request):
     }
     return render(request, "japan_clothes.html", context)
 
+#일본 의류 시세 상세 페이지
+@login_required
+def japan_clothes_detail(request, id):
+    japan_clothes_post = get_object_or_404(Japan_clothes, pk=id)
+    if request.method == "POST":
+        comment_content = request.POST["comment"]
+        comment_number = request.POST.get("number", 0)
+        Japan_clothes_Comment.objects.create(
+            user=request.user,
+            japan_clothes_post=japan_clothes_post,
+            content=comment_content,
+            number=comment_number,
+        )
+    return render(request, "japan_clothes_detail.html", {"japan_clothes_post":japan_clothes_post})
+
 #일본 음식 시세 페이지
 def japan_foods(request):
     keyword = request.GET.get("keyword")
@@ -72,6 +88,21 @@ def japan_foods(request):
     }
     return render(request, "japan_foods.html", context)
 
+#일본 음식 시세 상세 페이지
+@login_required
+def japan_foods_detail(request, id):
+    # japan_foods_post = get_object_or_404(Japan_foods, pk=id)
+    # if request.method == "POST":
+    #     comment_content = request.POST["comment"]
+    #     comment_number = request.POST.get("number", 0)
+    #     Japan_foods_Comment.objects.create(
+    #         user=request.user,
+    #         japan_foods_post=japan_foods_post,
+    #         content=comment_content,
+    #         number=comment_number,
+    #     )
+    return render(request, "japan_foods_detail.html")
+
 #일본 잡화 시세 페이지
 def japan_others(request):
     keyword = request.GET.get("keyword")
@@ -82,6 +113,21 @@ def japan_others(request):
         "others": others,
     }
     return render(request, "japan_others.html", context)
+
+#일본 잡화 시세 상세 페이지
+@login_required
+def japan_others_detail(request, id):
+    japan_others_post = get_object_or_404(Japan_others, pk=id)
+    if request.method == "POST":
+        comment_content = request.POST["comment"]
+        comment_number = request.POST.get("number", 0)
+        Japan_others_Comment.objects.create(
+            user=request.user,
+            japan_others_post=japan_others_post,
+            content=comment_content,
+            number=comment_number,
+        )
+    return render(request, "japan_others_detail.html", {"japan_others_post":japan_others_post})
 
 #일본 날씨
 def japan_weather():
@@ -99,6 +145,17 @@ def japan_weather():
     return clouds_info, icon_info, temperature
 
 #일본 환율계산기
+def exchange(request):
+    if request.method == 'POST':
+        country = request.POST.get('country')
+        if country=='japan':
+            return redirect('savior:japan_exchange')
+        elif country=='USA':
+            return redirect('savior:USA_exchange')
+        else:
+            return redirect('savior:vietnam_exchange')
+    return render(request, 'japan_exchange.html')
+
 def get_exchange_rate1():
     headers = {
         'User-Agent': 'Mozilla/5.0',
@@ -130,9 +187,9 @@ def japan_exchange(request):
         return render(request, 'japan_exchange.html')
 
 #미국 상세페이지
-def USA(request):
+def usa(request):
     exchange_rate = get_exchange_rate2()
-    clouds_info, icon_info, temperature = USA_weather()
+    clouds_info, icon_info, temperature = usa_weather()
     context = {
         'clouds_info': clouds_info,
         'icon_info': icon_info,
@@ -152,6 +209,21 @@ def usa_clothes(request):
     }
     return render(request, "USA_clothes.html", context)
 
+#미국 의류 시세 상세 페이지
+@login_required
+def usa_clothes_detail(request, id):
+    usa_clothes_post = get_object_or_404(USA_clothes, pk=id)
+    if request.method == "POST":
+        comment_content = request.POST["comment"]
+        comment_number = request.POST.get("number", 0)
+        USA_clothes_Comment.objects.create(
+            user=request.user,
+            usa_clothes_post=usa_clothes_post,
+            content=comment_content,
+            number=comment_number,
+        )
+    return render(request, "USA_clothes_detail.html", {"usa_clothes_post":usa_clothes_post})
+
 #미국 음식 시세 페이지
 def usa_foods(request):
     keyword = request.GET.get("keyword")
@@ -162,6 +234,11 @@ def usa_foods(request):
         "foods": foods,
     }
     return render(request, "USA_foods.html", context)
+
+#미국 음식 시세 상세 페이지
+@login_required
+def usa_foods_detail(request, id):
+    return render(request, "USA_foods_detail.html")
 
 #미국 잡화 시세 페이지
 def usa_others(request):
@@ -174,8 +251,23 @@ def usa_others(request):
     }
     return render(request, "USA_others.html", context)
 
+#미국 잡화 시세 상세 페이지
+@login_required
+def usa_others_detail(request, id):
+    USA_others_post = get_object_or_404(USA_others, pk=id)
+    if request.method == "POST":
+        comment_content = request.POST["comment"]
+        comment_number = request.POST.get("number", 0)
+        USA_others_Comment.objects.create(
+            user=request.user,
+            usa_others_post=USA_others_post,
+            content=comment_content,
+            number=comment_number,
+        )
+    return render(request, "USA_others_detail.html", {"USA_others_post":USA_others_post})
+
 #미국 날씨
-def USA_weather():
+def usa_weather():
     city = "Washington D.C."
     apikey = "1a34ea4698296cf6cb4bb168b8356219"
     lang = "kr"
@@ -204,7 +296,7 @@ def get_exchange_rate2():
 
     return exchange_rate
 
-def USA_exchange(request):
+def usa_exchange(request):
     if request.method == 'POST':
         USD = request.POST.get('USD', 0)
         USD = int(USD)
@@ -241,6 +333,21 @@ def vietnam_clothes(request):
     }
     return render(request, "vietnam_clothes.html", context)
 
+#베트남 의류 시세 상세 페이지
+@login_required
+def vietnam_clothes_detail(request, id):
+    vietnam_clothes_post = get_object_or_404(Vietnam_clothes, pk=id)
+    if request.method == "POST":
+        comment_content = request.POST["comment"]
+        comment_number = request.POST.get("number", 0)
+        Vietnam_clothes_Comment.objects.create(
+            user=request.user,
+            vietnam_clothes_post=vietnam_clothes_post,
+            content=comment_content,
+            number=comment_number,
+        )
+    return render(request, "vietnam_clothes_detail.html", {"vietnam_clothes_post":vietnam_clothes_post})
+
 #베트남 음식 시세 페이지
 def vietnam_foods(request):
     keyword = request.GET.get("keyword")
@@ -252,6 +359,11 @@ def vietnam_foods(request):
     }
     return render(request, "vietnam_foods.html", context)
 
+#베트남 음식 시세 상세 페이지
+@login_required
+def vietnam_foods_detail(request, id):
+    return render(request, "vietnam_foods_detail.html")
+
 #베트남 잡화 시세 페이지
 def vietnam_others(request):
     keyword = request.GET.get("keyword")
@@ -262,6 +374,21 @@ def vietnam_others(request):
         "others": others,
     }
     return render(request, "vietnam_others.html", context)
+
+#베트남 잡화 시세 상세 페이지
+@login_required
+def vietnam_others_detail(request, id):
+    vietnam_others_post = get_object_or_404(Vietnam_others, pk=id)
+    if request.method == "POST":
+        comment_content = request.POST["comment"]
+        comment_number = request.POST.get("number", 0)
+        Vietnam_others_Comment.objects.create(
+            user=request.user,
+            vietnam_others_post=vietnam_others_post,
+            content=comment_content,
+            number=comment_number,
+        )
+    return render(request, "vietnam_others_detail.html", {"vietnam_others_post":vietnam_others_post})
 
 #베트남 날씨
 def vietnam_weather():
@@ -295,8 +422,7 @@ def mypage(request):
 #커뮤니티
 def community(request):
     if not request.user.is_authenticated:
-        return redirect("accounts:login")
-    
+        return redirect("savior:accounts:login")
     posts = Post.objects.all()
     context = {"posts": posts}
     return render(request, "community.html", context)
@@ -370,4 +496,4 @@ def likes(request, id):
         else:
             post.like_users.add(request.user)
         return redirect(reverse('savior:community_detail', args=[post.pk]))
-    return redirect('accounts:login')
+    return redirect("savior:accounts:login")

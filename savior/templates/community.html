@@ -9,8 +9,9 @@
     </style>
 </head>
 <body>
-    <a href="{% url 'savior:main' %}">뒤로가기</a>
-    <br>
+    <a href="{% url 'savior:main' %}">뒤로가기</a><br>
+    <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
+
     <h1>자유게시판</h1><br>
     <hr>
     {% for post in posts %}
