@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import *
+from django.contrib.auth.models import User
 from django.conf import settings
 
 # Create your models here.
@@ -11,17 +12,47 @@ class Japan_clothes(models.Model):
     def __str__(self):
         return self.japan_clothes
 
+class Japan_clothes_Comment(models.Model):
+    user = models.ForeignKey(
+        "users.User",
+        verbose_name="일본 의류 시세 댓글 작성자",
+        on_delete=models.CASCADE,
+    )
+    japan_clothes_post = models.ForeignKey(Japan_clothes, verbose_name="일본 의류 시세 댓글", on_delete=models.CASCADE)
+    content = models.TextField("내용")
+    number = models.IntegerField("숫자")
+
 class Japan_foods(models.Model):
     japan_foods = models.CharField(max_length=10)
 
     def __str__(self):
         return self.japan_foods
     
+class Japan_foods_Comment(models.Model):
+    user = models.ForeignKey(
+        "users.User",
+        verbose_name="일본 음식 시세 댓글 작성자",
+        on_delete=models.CASCADE,
+    )
+    japan_foods_post = models.ForeignKey(Japan_foods, verbose_name="일본 음식 시세 댓글", on_delete=models.CASCADE)
+    content = models.TextField("내용")
+    number = models.IntegerField("숫자")
+    
 class Japan_others(models.Model):
     japan_others = models.CharField(max_length=10)
 
     def __str__(self):
         return self.japan_others
+    
+class Japan_others_Comment(models.Model):
+    user = models.ForeignKey(
+        "users.User",
+        verbose_name="일본 잡화 시세 댓글 작성자",
+        on_delete=models.CASCADE,
+    )
+    japan_others_post = models.ForeignKey(Japan_others, verbose_name="일본 잡화 시세 댓글", on_delete=models.CASCADE)
+    content = models.TextField("내용")
+    number = models.IntegerField("숫자")
 
 #미국
 class USA_clothes(models.Model):
@@ -29,6 +60,16 @@ class USA_clothes(models.Model):
 
     def __str__(self):
         return self.usa_clothes
+    
+class USA_clothes_Comment(models.Model):
+    user = models.ForeignKey(
+        "users.User",
+        verbose_name="미국 의류 시세 댓글 작성자",
+        on_delete=models.CASCADE,
+    )
+    usa_clothes_post = models.ForeignKey(USA_clothes, verbose_name="미국 의류 시세 댓글", on_delete=models.CASCADE)
+    content = models.TextField("내용")
+    number = models.IntegerField("숫자")
 
 class USA_foods(models.Model):
     usa_foods = models.CharField(max_length=10)
@@ -42,12 +83,32 @@ class USA_others(models.Model):
     def __str__(self):
         return self.usa_others
     
+class USA_others_Comment(models.Model):
+    user = models.ForeignKey(
+        "users.User",
+        verbose_name="미국 잡화 시세 댓글 작성자",
+        on_delete=models.CASCADE,
+    )
+    usa_others_post = models.ForeignKey(USA_others, verbose_name="미국 잡화 시세 댓글", on_delete=models.CASCADE)
+    content = models.TextField("내용")
+    number = models.IntegerField("숫자")
+    
 #베트남
 class Vietnam_clothes(models.Model):
     vietnam_clothes = models.CharField(max_length=10)
 
     def __str__(self):
         return self.vietnam_clothes
+    
+class Vietnam_clothes_Comment(models.Model):
+    user = models.ForeignKey(
+        "users.User",
+        verbose_name="베트남 의류 시세 댓글 작성자",
+        on_delete=models.CASCADE,
+    )
+    vietnam_clothes_post = models.ForeignKey(Vietnam_clothes, verbose_name="베트남 의류 시세 댓글", on_delete=models.CASCADE)
+    content = models.TextField("내용")
+    number = models.IntegerField("숫자")
 
 class Vietnam_foods(models.Model):
     vietnam_foods = models.CharField(max_length=10)
@@ -60,6 +121,16 @@ class Vietnam_others(models.Model):
 
     def __str__(self):
         return self.vietnam_others
+    
+class Vietnam_others_Comment(models.Model):
+    user = models.ForeignKey(
+        "users.User",
+        verbose_name="베트남 잡화 시세 댓글 작성자",
+        on_delete=models.CASCADE,
+    )
+    vietnam_others_post = models.ForeignKey(Vietnam_others, verbose_name="베트남 잡화 시세 댓글", on_delete=models.CASCADE)
+    content = models.TextField("내용")
+    number = models.IntegerField("숫자")
 
 
 #커뮤니티 기능

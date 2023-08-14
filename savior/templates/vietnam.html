@@ -6,7 +6,9 @@
     <title>베트남 상세페이지</title>
 </head>
 <body>
-    <a href="{% url 'savior:main' %}">뒤로가기</a><br><br>
+    <a href="{% url 'savior:main' %}">뒤로가기</a><br>
+    <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
+    
     실시간 환율: {{ exchange_rate }}동 <br>
     <a href="{% url 'savior:vietnam_exchange' %}">환율계산기</a><br><br>
     <span>
