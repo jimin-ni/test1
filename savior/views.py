@@ -50,7 +50,7 @@ def japan(request):
     }
     return render(request, "japan.html", context)
 
-#일본 의류 시세 페이지
+#! 일본 의류 시세 페이지
 def japan_clothes(request):
     keyword = request.GET.get("keyword")
     clothes = Japan_clothes.objects.all()
@@ -372,7 +372,7 @@ def likes(request, id):
         return redirect(reverse('savior:community_detail', args=[post.pk]))
     return redirect('accounts:login')
 
-#* 식당 추천 페이지 
+#* 미국 USA 식당 소개 페이지 
 def recommend_restaurant(request):
     csv_data = []
     
@@ -390,12 +390,53 @@ def recommend_restaurant(request):
             for row in csv_reader:
                 csv_data.append(row)
 
-        # context = {
-        #     'search_name': search_name,
-        #     'food_names': food_names,
-        # }
-
         return render(request, 'recommend_restaurant.html', {'csv_data': csv_data})
         # return render(request, 'recommend_restaurant.html', context)
 
     return render(request, 'recommend_restaurant.html')
+
+#* 일본 Japan 식당 소개 페이지 
+def Japan_restaurant(request):
+    csv_data = []
+    
+    if request.method == 'POST':
+        user_input_search = request.POST.get('user_input_search')
+
+        # food_names, food_codes = main_function(5, [], [], [], [], None, search_name)  # 예시로 5개의 결과만 가져옴
+        main_function(user_input_search)  # 예시로 5개의 결과만 가져옴
+        print("main_function 함수 실행")
+        
+        csv_filename = f'{user_input_search}_search_result_Japan.csv' # user_input_search 이름을 활용해서 파일 명 생성
+        with open(csv_filename, 'r', encoding='utf-8-sig') as file:
+            # 'r'-> 읽기(read) 모드로 열겠다
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                csv_data.append(row)
+
+        return render(request, 'Japan_restaurant_list.html', {'csv_data': csv_data})
+        # return render(request, 'recommend_restaurant.html', context)
+
+    return render(request, 'Japan_restaurant_list.html')
+
+#* 베트남 Vietnam 식당 소개 페이지 
+def Vietnam_restaurant(request):
+    csv_data = []
+    
+    if request.method == 'POST':
+        user_input_search = request.POST.get('user_input_search')
+
+        # food_names, food_codes = main_function(5, [], [], [], [], None, search_name)  # 예시로 5개의 결과만 가져옴
+        main_function(user_input_search)  # 예시로 5개의 결과만 가져옴
+        print("main_function 함수 실행")
+        
+        csv_filename = f'{user_input_search}_search_result_Vietnam.csv' # user_input_search 이름을 활용해서 파일 명 생성
+        with open(csv_filename, 'r', encoding='utf-8-sig') as file:
+            # 'r'-> 읽기(read) 모드로 열겠다
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                csv_data.append(row)
+
+        return render(request, 'Vietnam_restaurant_list.html', {'csv_data': csv_data})
+        # return render(request, 'recommend_restaurant.html', context)
+
+    return render(request, 'Vietnam_restaurant_list.html')

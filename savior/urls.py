@@ -50,6 +50,8 @@ urlpatterns = [
 
     #* 식당 추천 
     path('recommend/', views.recommend_restaurant, name='recommend'),
+    path('recommend_japan/', views.Japan_restaurant, name='recommend_japan'),
+    path('recommend_vietnam/', views.Vietnam_restaurant, name='recommend_vietnam'),
 
 
 ]
