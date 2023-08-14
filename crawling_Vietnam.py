@@ -13,25 +13,26 @@ from selenium.webdriver.chrome.service import Service
 import time
 import pandas as pd
 
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
 
 # link = 'https://www.google.com/maps'
 # driver.get(link)
 
 # 판다스를 이용해 엑셀 파일 - 검색할 목록 가져오기 
-def search_bulit(user_input_search):
+def search_bulit(user_input_search_v):
     df = pd.read_excel('HoChiMinh_zipcodes_Vietnam.xlsx') #* 이 파일이 있는 경로로 터미널 이동
 
     print(df)
     food_city = df['po_name']  # 도시 명
     food_code = df['zip']      # 우편번호 
-    food_state = df['state']   # 캘리포니아 주 (로스엔젤러스만 해당하는 데이터만 있음)
+    food_state = df['state']   # 호치민
     search_name = []
     
     for i in range(len(food_city)):
             #구글맵 검색어 정의(지역 + 코드 + Pizza + restaurants)
             # name = food_city[i] + " " + str(food_code[i]) + " Pizza" + " Restaurants" 
-            name = food_city[i] + " " + str(food_code[i]) + " " + user_input_search + " nhà hàng"  #* user_input_search 을 html에서 검색받아 실행
+            # name = food_city[i] + " " + str(food_code[i]) + " " + user_input_search_v  #* user_input_search_v 을 html에서 검색받아 실행
+            name = food_city[i] + " " + str(food_code[i]) + " " + user_input_search_v + " nhà hàng"  #* user_input_search_v 을 html에서 검색받아 실행
             search_name.append(name) 
             print(name)
     return search_name, food_code
@@ -173,7 +174,7 @@ def data_split(food_names,food_codes): # food_name 데이터를 필요한 정보
 
 # 데이터를 로컬에 저장한다.
 
-def datafram_make(food_name,food_name_code,rating, reviews, dollar, address, user_input_search):
+def datafram_make(food_name,food_name_code,rating, reviews, dollar, address, user_input_search_v):
     df = pd.DataFrame({
                         'food_name' : food_name,
                         'codezip' : food_name_code,
@@ -182,13 +183,13 @@ def datafram_make(food_name,food_name_code,rating, reviews, dollar, address, use
                         'dollar' : dollar,
                         'address' : address,
                         })
-    csv_filename = f'{user_input_search}_search_result_Vietnam.csv' # user_input_search 이름을 활용해서 파일 명 생성
+    csv_filename = f'{user_input_search_v}_search_result_Vietnam.csv' # user_input_search_v 이름을 활용해서 파일 명 생성
     df.to_csv(csv_filename, encoding='utf-8-sig')     # 이 코드가 실행되면 로컬에 foodinfo_ca_losangeles.csv 파일이 생긴다.
     # df.to_excel(csv_filename)  # 이 코드가 실행되면 로컬에 foodinfo_ca_losangeles.excel 파일이 생긴다.
 
 #* 메인 함수 생성 
-def main_function(user_input_search):
-    search_name,food_code = search_bulit(user_input_search) #매장이름, zipcode 데이터 불러오기
+def main_function_vietnam(user_input_search_v):
+    search_name,food_code = search_bulit(user_input_search_v) #매장이름, zipcode 데이터 불러오기
 
     # 옵션 생성
     options = webdriver.ChromeOptions()
@@ -217,10 +218,10 @@ def main_function(user_input_search):
     food_names,food_codes,error_search = [], [], [] # 음식점 이름 저장
     food_names, food_codes = main_search(number,food_names,food_codes,error_search,food_code,driver,search_name)
     food_names, food_name, food_name_code, rating, reviews, dollar, address = data_split(food_names,food_codes) # 이름저장한거 가져와서 데이터 가공하기 
-    datafram_make(food_name,food_name_code,rating, reviews, dollar, address, user_input_search)
+    datafram_make(food_name,food_name_code,rating, reviews, dollar, address, user_input_search_v)
     
     driver.quit()
 
 #* 실제 본 프로그램 진행
 if __name__ == "__main__":
-    main_function()
+    main_function_vietnam()

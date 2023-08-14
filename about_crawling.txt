@@ -6,12 +6,17 @@
 
 * crawling 작동을 위해 꼭 있어야 하는 파일:
     - crawling.py
+    - crawling_Japan.py
+    - crawling_Vietnam.py
     - chromedriver.exe
     - California_zipcodes_LosAngles.xlsx 
+    - HoChiMinh_zipcodes_Vietnam.xlsx
+    - MinatoKu_zipcodes_Tokyo.xlsx
 
 * 각 파일 설명     
-    - crawling.py
-    제가 만든 크롤링 소프트웨어 입니다. selenium을 이용했으며, 핵심 소스 파일입니다.
+    - crawling.py, crawling_Japan.py, crawling_Vietnam.py
+    크롤링 소프트웨어 입니다. selenium을 이용했으며, 핵심 소스 파일입니다.
+    각 국가별로 나뉘어 작동합니다.
     !!! 절대 삭제하지 마세요 !!! 
 
     주요 기능은 아래와 같습니다.
@@ -31,4 +36,14 @@
     crawling.py 파일에서 필요로 하는 프로그램 파일입니다. 
 
     - California_zipcodes_LosAngles.xlsx 
-    crawling.py을 이용한 검색을 진행할 때 필요합니다. 다른 검색을 하고 싶다면 해당 파일을 변경하면 됩니다.
+        미국에 대한 크롤링을 담당합니다.
+        crawling.py을 이용한 검색을 진행할 때 필요합니다. 
+        다른 검색을 하고 싶다면 해당 파일을 변경하면 됩니다.
+
+    - HoChiMinh_zipcodes_Vietnam.xlsx
+        베트남에 대한 크롤링을 담당합니다.
+        crawling_Vietnam.py을 이용한 검색을 진행할 때 필요합니다. 
+
+    - MinatoKu_zipcodes_Tokyo.xlsx
+        일본에 대한 크롤링을 담당합니다.
+        crawling_Japan.py을 이용한 검색을 진행할 때 필요합니다. 

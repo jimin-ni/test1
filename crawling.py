@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.service import Service
 import time
 import pandas as pd
 
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
 
 # link = 'https://www.google.com/maps'
 # driver.get(link)
@@ -106,7 +106,7 @@ def main_search(number,food_names,food_codes,error_search,food_code,driver,searc
                         except:
                             break
                                             
-                    time.sleep(2.8)
+                    time.sleep(1.5)
                 except:
                     break
                 print(" try, except 문 밖임 ")
