@@ -66,10 +66,11 @@ def japan_clothes(request):
     }
     return render(request, "japan_clothes.html", context)
 
-#! 일본 의류 시세 상세 페이지
+#! 일본 의류 시세 상세 페이지 -> 댓글을 통해 시세(금액) 평균, 최대, 최소 
 @login_required
 def japan_clothes_detail(request, id):
     japan_clothes_post = get_object_or_404(Japan_clothes, pk=id)
+    
     if request.method == "POST":
         comment_content = request.POST["comment"]
         comment_number = request.POST.get("number", 0)
@@ -79,7 +80,24 @@ def japan_clothes_detail(request, id):
             content=comment_content,
             number=comment_number,
         )
-    return render(request, "japan_clothes_detail.html", {"japan_clothes_post":japan_clothes_post})
+    # return render(request, "japan_clothes_detail.html", {"japan_clothes_post":japan_clothes_post})
+    comments = Japan_clothes_Comment.objects.filter(japan_clothes_post=japan_clothes_post)
+    
+    # 숫자 데이터 리스트 생성
+    number_list = [comment.number for comment in comments]
+    
+    # 계산
+    average_number = sum(number_list) / len(number_list) if number_list else 0
+    max_number = max(number_list) if number_list else 0
+    min_number = min(number_list) if number_list else 0
+    
+    return render(request, "japan_clothes_detail.html", {
+        "japan_clothes_post": japan_clothes_post,
+        "comments": comments,
+        "average_number": average_number,
+        "max_number": max_number,
+        "min_number": min_number,
+    })
 
 #일본 음식 시세 페이지
 def japan_foods(request):
