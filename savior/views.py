@@ -3,16 +3,20 @@ from .models import *
 from users.models import *
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
+from crawling import main_function  # crawling.py 파일의 main_search 함수 임포트
 
-# Create your views here.
+from django.views.decorators.http import require_POST
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import cloudscraper
 import requests
 import json
-# Create your views here.
+import csv
+
+from crawling_Vietnam import main_function_vietnam  # crawling.py 파일의 main_search 함수 임포트
+from crawling_Japan import main_function_japan
+
 
 #임시용 메인페이지
 def main(request):
@@ -51,7 +55,7 @@ def japan(request):
     }
     return render(request, "japan.html", context)
 
-#일본 의류 시세 페이지
+#! 일본 의류 시세 페이지
 def japan_clothes(request):
     keyword = request.GET.get("keyword")
     clothes = Japan_clothes.objects.all()
@@ -62,10 +66,11 @@ def japan_clothes(request):
     }
     return render(request, "japan_clothes.html", context)
 
-#일본 의류 시세 상세 페이지
+#! 일본 의류 시세 상세 페이지 -> 댓글을 통해 시세(금액) 평균, 최대, 최소 
 @login_required
 def japan_clothes_detail(request, id):
     japan_clothes_post = get_object_or_404(Japan_clothes, pk=id)
+    
     if request.method == "POST":
         comment_content = request.POST["comment"]
         comment_number = request.POST.get("number", 0)
@@ -75,7 +80,24 @@ def japan_clothes_detail(request, id):
             content=comment_content,
             number=comment_number,
         )
-    return render(request, "japan_clothes_detail.html", {"japan_clothes_post":japan_clothes_post})
+    # return render(request, "japan_clothes_detail.html", {"japan_clothes_post":japan_clothes_post})
+    comments = Japan_clothes_Comment.objects.filter(japan_clothes_post=japan_clothes_post)
+    
+    # 숫자 데이터 리스트 생성
+    number_list = [comment.number for comment in comments]
+    
+    # 계산
+    average_number = sum(number_list) / len(number_list) if number_list else 0
+    max_number = max(number_list) if number_list else 0
+    min_number = min(number_list) if number_list else 0
+    
+    return render(request, "japan_clothes_detail.html", {
+        "japan_clothes_post": japan_clothes_post,
+        "comments": comments,
+        "average_number": average_number,
+        "max_number": max_number,
+        "min_number": min_number,
+    })
 
 #일본 음식 시세 페이지
 def japan_foods(request):
@@ -496,4 +518,76 @@ def likes(request, id):
         else:
             post.like_users.add(request.user)
         return redirect(reverse('savior:community_detail', args=[post.pk]))
-    return redirect("savior:accounts:login")
+    return redirect('accounts:login')
+
+#* 미국 USA 식당 소개 페이지 
+def recommend_restaurant(request):
+    csv_data = []
+    
+    if request.method == 'POST':
+        user_input_search = request.POST.get('user_input_search')
+
+        # food_names, food_codes = main_function(5, [], [], [], [], None, search_name)  # 예시로 5개의 결과만 가져옴
+        main_function(user_input_search)  # 예시로 5개의 결과만 가져옴
+        print("main_function 함수 실행")
+        
+        csv_filename = f'{user_input_search}_search_result_USA.csv' # user_input_search 이름을 활용해서 파일 명 생성
+        with open(csv_filename, 'r', encoding='utf-8-sig') as file:
+            # 'r'-> 읽기(read) 모드로 열겠다
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                csv_data.append(row)
+
+        return render(request, 'recommend_restaurant.html', {'csv_data': csv_data})
+        # return render(request, 'recommend_restaurant.html', context)
+
+    return render(request, 'recommend_restaurant.html')
+
+
+ 
+
+#* 일본 Japan 식당 소개 페이지 
+def Japan_restaurant(request):
+    csv_data_j = []
+    
+    if request.method == 'POST':
+        user_input_search_j = request.POST.get('user_input_search_j')
+
+        # food_names, food_codes = main_function(5, [], [], [], [], None, search_name)  # 예시로 5개의 결과만 가져옴
+        main_function_japan(user_input_search_j)  # 예시로 5개의 결과만 가져옴
+        print("main_function 함수 실행")
+        
+        csv_filenam_j = f'{user_input_search_j}_search_result_Japan.csv' # user_input_search_j 이름을 활용해서 파일 명 생성
+        with open(csv_filenam_j, 'r', encoding='utf-8-sig') as file:
+            # 'r'-> 읽기(read) 모드로 열겠다
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                csv_data_j.append(row)
+
+        return render(request, 'Japan_restaurant_list.html', {'csv_data': csv_data_j})
+        # return render(request, 'recommend_restaurant.html', context)
+
+    return render(request, 'Japan_restaurant_list.html')
+
+#* 베트남 Vietnam 식당 소개 페이지 
+def Vietnam_restaurant(request):
+    csv_dat_v = []
+    
+    if request.method == 'POST':
+        user_input_search_v = request.POST.get('user_input_search_v')
+
+        # food_names, food_codes = main_function(5, [], [], [], [], None, search_name)  # 예시로 5개의 결과만 가져옴
+        main_function_vietnam(user_input_search_v)  # 예시로 5개의 결과만 가져옴
+        print("main_function 함수 실행")
+        
+        csv_filename_v = f'{user_input_search_v}_search_result_Vietnam.csv' # user_input_search_v 이름을 활용해서 파일 명 생성
+        with open(csv_filename_v, 'r', encoding='utf-8-sig') as file:
+            # 'r'-> 읽기(read) 모드로 열겠다
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                csv_dat_v.append(row)
+
+        return render(request, 'Vietnam_restaurant_list.html', {'csv_data': csv_dat_v})
+        # return render(request, 'recommend_restaurant.html', context)
+
+    return render(request, 'Vietnam_restaurant_list.html')
