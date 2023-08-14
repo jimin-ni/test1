@@ -3,15 +3,15 @@ from .models import *
 from users.models import *
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from crawling import main_function  # crawling.py 파일의 main_search 함수 임포트
 
-# Create your views here.
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import cloudscraper
 import requests
 import json
-# Create your views here.
+import csv
 
 #임시용 메인페이지
 def main(request):
@@ -371,3 +371,31 @@ def likes(request, id):
             post.like_users.add(request.user)
         return redirect(reverse('savior:community_detail', args=[post.pk]))
     return redirect('accounts:login')
+
+#* 식당 추천 페이지 
+def recommend_restaurant(request):
+    csv_data = []
+    
+    if request.method == 'POST':
+        user_input_search = request.POST.get('user_input_search')
+
+        # food_names, food_codes = main_function(5, [], [], [], [], None, search_name)  # 예시로 5개의 결과만 가져옴
+        main_function(user_input_search)  # 예시로 5개의 결과만 가져옴
+        print("main_function 함수 실행")
+        
+        csv_filename = f'{user_input_search}_search_result_USA.csv' # user_input_search 이름을 활용해서 파일 명 생성
+        with open(csv_filename, 'r', encoding='utf-8-sig') as file:
+            # 'r'-> 읽기(read) 모드로 열겠다
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                csv_data.append(row)
+
+        # context = {
+        #     'search_name': search_name,
+        #     'food_names': food_names,
+        # }
+
+        return render(request, 'recommend_restaurant.html', {'csv_data': csv_data})
+        # return render(request, 'recommend_restaurant.html', context)
+
+    return render(request, 'recommend_restaurant.html')

@@ -47,6 +47,11 @@ urlpatterns = [
     path('<int:id>/likes/', views.likes, name='likes'),
     path('community_detail/<int:id>', views.community_detail, name='community_detail'),
     path('community_delete/<int:id>', views.community_delete, name='community_delete'),
+
+    #* 식당 추천 
+    path('recommend/', views.recommend_restaurant, name='recommend'),
+
+
 ]
 
 urlpatterns += static(
