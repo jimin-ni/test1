@@ -80,7 +80,6 @@ def japan_clothes_detail(request, id):
             content=comment_content,
             number=comment_number,
         )
-    # return render(request, "japan_clothes_detail.html", {"japan_clothes_post":japan_clothes_post})
     comments = Japan_clothes_Comment.objects.filter(japan_clothes_post=japan_clothes_post)
     
     # 숫자 데이터 리스트 생성
@@ -136,10 +135,11 @@ def japan_others(request):
     }
     return render(request, "japan_others.html", context)
 
-#일본 잡화 시세 상세 페이지
+#! 일본 잡화 시세 상세 페이지 -> 시세 입력, 평균, 최대, 최소 도출
 @login_required
 def japan_others_detail(request, id):
     japan_others_post = get_object_or_404(Japan_others, pk=id)
+    
     if request.method == "POST":
         comment_content = request.POST["comment"]
         comment_number = request.POST.get("number", 0)
@@ -149,7 +149,26 @@ def japan_others_detail(request, id):
             content=comment_content,
             number=comment_number,
         )
-    return render(request, "japan_others_detail.html", {"japan_others_post":japan_others_post})
+
+    # return render(request, "japan_clothes_detail.html", {"japan_clothes_post":japan_clothes_post})
+    comments = Japan_others_Comment.objects.filter(japan_others_post=japan_others_post)
+    
+    # 숫자 데이터 리스트 생성
+    number_list = [comment.number for comment in comments]
+    
+    # 계산
+    average_number = sum(number_list) / len(number_list) if number_list else 0
+    max_number = max(number_list) if number_list else 0
+    min_number = min(number_list) if number_list else 0
+    
+    return render(request, "japan_others_detail.html", {
+        "japan_others_post": japan_others_post,
+        "comments": comments,
+        "average_number": average_number,
+        "max_number": max_number,
+        "min_number": min_number,
+    })
+
 
 #일본 날씨
 def japan_weather():
@@ -231,7 +250,7 @@ def usa_clothes(request):
     }
     return render(request, "USA_clothes.html", context)
 
-#미국 의류 시세 상세 페이지
+#! 미국 의류 시세 상세 페이지 -> 시세(금액) 평균, 최대, 최소 
 @login_required
 def usa_clothes_detail(request, id):
     usa_clothes_post = get_object_or_404(USA_clothes, pk=id)
@@ -244,7 +263,24 @@ def usa_clothes_detail(request, id):
             content=comment_content,
             number=comment_number,
         )
-    return render(request, "USA_clothes_detail.html", {"usa_clothes_post":usa_clothes_post})
+    comments = USA_clothes_Comment.objects.filter(usa_clothes_post=usa_clothes_post)
+    
+    # 숫자 데이터 리스트 생성
+    number_list = [comment.number for comment in comments]
+    
+    # 계산
+    average_number = sum(number_list) / len(number_list) if number_list else 0
+    max_number = max(number_list) if number_list else 0
+    min_number = min(number_list) if number_list else 0
+    
+    return render(request, "USA_clothes_detail.html", {
+        "usa_clothes_post": usa_clothes_post,
+        "comments": comments,
+        "average_number": average_number,
+        "max_number": max_number,
+        "min_number": min_number,
+    })
+
 
 #미국 음식 시세 페이지
 def usa_foods(request):
@@ -257,7 +293,7 @@ def usa_foods(request):
     }
     return render(request, "USA_foods.html", context)
 
-#미국 음식 시세 상세 페이지
+#미국 음식 시세 상세 페이지 
 @login_required
 def usa_foods_detail(request, id):
     return render(request, "USA_foods_detail.html")
@@ -273,7 +309,7 @@ def usa_others(request):
     }
     return render(request, "USA_others.html", context)
 
-#미국 잡화 시세 상세 페이지
+#! 미국 잡화 시세 상세 페이지 -> 시세(금액) 평균, 최대, 최소 
 @login_required
 def usa_others_detail(request, id):
     USA_others_post = get_object_or_404(USA_others, pk=id)
@@ -286,7 +322,23 @@ def usa_others_detail(request, id):
             content=comment_content,
             number=comment_number,
         )
-    return render(request, "USA_others_detail.html", {"USA_others_post":USA_others_post})
+    comments = USA_others_Comment.objects.filter(usa_others_post=USA_others_post)
+    
+    # 숫자 데이터 리스트 생성
+    number_list = [comment.number for comment in comments]
+    
+    # 계산
+    average_number = sum(number_list) / len(number_list) if number_list else 0
+    max_number = max(number_list) if number_list else 0
+    min_number = min(number_list) if number_list else 0
+    
+    return render(request, "USA_others_detail.html", {
+        "USA_others_post": USA_others_post,
+        "comments": comments,
+        "average_number": average_number,
+        "max_number": max_number,
+        "min_number": min_number,
+    })
 
 #미국 날씨
 def usa_weather():
@@ -355,7 +407,7 @@ def vietnam_clothes(request):
     }
     return render(request, "vietnam_clothes.html", context)
 
-#베트남 의류 시세 상세 페이지
+#! 베트남 의류 시세 상세 페이지 -> 시세(금액) 평균, 최대, 최소 
 @login_required
 def vietnam_clothes_detail(request, id):
     vietnam_clothes_post = get_object_or_404(Vietnam_clothes, pk=id)
@@ -368,7 +420,23 @@ def vietnam_clothes_detail(request, id):
             content=comment_content,
             number=comment_number,
         )
-    return render(request, "vietnam_clothes_detail.html", {"vietnam_clothes_post":vietnam_clothes_post})
+    comments = Vietnam_clothes_Comment.objects.filter(vietnam_clothes_post=vietnam_clothes_post)
+    
+    # 숫자 데이터 리스트 생성
+    number_list = [comment.number for comment in comments]
+    
+    # 계산
+    average_number = sum(number_list) / len(number_list) if number_list else 0
+    max_number = max(number_list) if number_list else 0
+    min_number = min(number_list) if number_list else 0
+    
+    return render(request, "vietnam_clothes_detail.html", {
+        "vietnam_clothes_post": vietnam_clothes_post,
+        "comments": comments,
+        "average_number": average_number,
+        "max_number": max_number,
+        "min_number": min_number,
+    })
 
 #베트남 음식 시세 페이지
 def vietnam_foods(request):
@@ -397,7 +465,7 @@ def vietnam_others(request):
     }
     return render(request, "vietnam_others.html", context)
 
-#베트남 잡화 시세 상세 페이지
+#! 베트남 잡화 시세 상세 페이지 -> 시세(금액) 평균, 최대, 최소 
 @login_required
 def vietnam_others_detail(request, id):
     vietnam_others_post = get_object_or_404(Vietnam_others, pk=id)
@@ -410,7 +478,24 @@ def vietnam_others_detail(request, id):
             content=comment_content,
             number=comment_number,
         )
-    return render(request, "vietnam_others_detail.html", {"vietnam_others_post":vietnam_others_post})
+    comments = Vietnam_others_Comment.objects.filter(vietnam_others_post=vietnam_others_post)
+    
+    # 숫자 데이터 리스트 생성
+    number_list = [comment.number for comment in comments]
+    
+    # 계산
+    average_number = sum(number_list) / len(number_list) if number_list else 0
+    max_number = max(number_list) if number_list else 0
+    min_number = min(number_list) if number_list else 0
+    
+    return render(request, "vietnam_others_detail.html", {
+        "vietnam_others_post": vietnam_others_post,
+        "comments": comments,
+        "average_number": average_number,
+        "max_number": max_number,
+        "min_number": min_number,
+    })
+
 
 #베트남 날씨
 def vietnam_weather():
