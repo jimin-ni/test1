@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
+from accounts.views import *
+from accounts.urls import *
 from users.models import *
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -67,19 +69,20 @@ def japan_clothes(request):
     return render(request, "japan_clothes.html", context)
 
 #! 일본 의류 시세 상세 페이지 -> 댓글을 통해 시세(금액) 평균, 최대, 최소 
-@login_required
 def japan_clothes_detail(request, id):
     japan_clothes_post = get_object_or_404(Japan_clothes, pk=id)
-    
     if request.method == "POST":
-        comment_content = request.POST["comment"]
-        comment_number = request.POST.get("number", 0)
-        Japan_clothes_Comment.objects.create(
-            user=request.user,
-            japan_clothes_post=japan_clothes_post,
-            content=comment_content,
-            number=comment_number,
-        )
+        if request.user.is_authenticated:
+            comment_content = request.POST["comment"]
+            comment_number = request.POST.get("number", 0)
+            Japan_clothes_Comment.objects.create(
+                user=request.user,
+                japan_clothes_post=japan_clothes_post,
+                content=comment_content,
+                number=comment_number,
+            )
+        else:
+            return redirect('savior:accounts:login')
     comments = Japan_clothes_Comment.objects.filter(japan_clothes_post=japan_clothes_post)
     
     # 숫자 데이터 리스트 생성
@@ -96,6 +99,7 @@ def japan_clothes_detail(request, id):
         "average_number": average_number,
         "max_number": max_number,
         "min_number": min_number,
+        "login_required_for_comment": True if not request.user.is_authenticated else False,
     })
 
 #일본 음식 시세 페이지
@@ -110,7 +114,6 @@ def japan_foods(request):
     return render(request, "japan_foods.html", context)
 
 #일본 음식 시세 상세 페이지
-@login_required
 def japan_foods_detail(request, id):
     # japan_foods_post = get_object_or_404(Japan_foods, pk=id)
     # if request.method == "POST":
@@ -136,20 +139,20 @@ def japan_others(request):
     return render(request, "japan_others.html", context)
 
 #! 일본 잡화 시세 상세 페이지 -> 시세 입력, 평균, 최대, 최소 도출
-@login_required
 def japan_others_detail(request, id):
     japan_others_post = get_object_or_404(Japan_others, pk=id)
-    
     if request.method == "POST":
-        comment_content = request.POST["comment"]
-        comment_number = request.POST.get("number", 0)
-        Japan_others_Comment.objects.create(
-            user=request.user,
-            japan_others_post=japan_others_post,
-            content=comment_content,
-            number=comment_number,
-        )
-
+        if request.user.is_authenticated:
+            comment_content = request.POST["comment"]
+            comment_number = request.POST.get("number", 0)
+            Japan_others_Comment.objects.create(
+                user=request.user,
+                japan_others_post=japan_others_post,
+                content=comment_content,
+                number=comment_number,
+            )
+        else:
+            return redirect('savior:accounts:login')
     # return render(request, "japan_clothes_detail.html", {"japan_clothes_post":japan_clothes_post})
     comments = Japan_others_Comment.objects.filter(japan_others_post=japan_others_post)
     
@@ -251,18 +254,20 @@ def usa_clothes(request):
     return render(request, "USA_clothes.html", context)
 
 #! 미국 의류 시세 상세 페이지 -> 시세(금액) 평균, 최대, 최소 
-@login_required
 def usa_clothes_detail(request, id):
     usa_clothes_post = get_object_or_404(USA_clothes, pk=id)
     if request.method == "POST":
-        comment_content = request.POST["comment"]
-        comment_number = request.POST.get("number", 0)
-        USA_clothes_Comment.objects.create(
-            user=request.user,
-            usa_clothes_post=usa_clothes_post,
-            content=comment_content,
-            number=comment_number,
-        )
+        if request.user.is_authenticated:
+            comment_content = request.POST["comment"]
+            comment_number = request.POST.get("number", 0)
+            USA_clothes_Comment.objects.create(
+                user=request.user,
+                usa_clothes_post=usa_clothes_post,
+                content=comment_content,
+                number=comment_number,
+            )
+        else:
+            return redirect('savior:accounts:login')
     comments = USA_clothes_Comment.objects.filter(usa_clothes_post=usa_clothes_post)
     
     # 숫자 데이터 리스트 생성
@@ -294,7 +299,6 @@ def usa_foods(request):
     return render(request, "USA_foods.html", context)
 
 #미국 음식 시세 상세 페이지 
-@login_required
 def usa_foods_detail(request, id):
     return render(request, "USA_foods_detail.html")
 
@@ -310,18 +314,20 @@ def usa_others(request):
     return render(request, "USA_others.html", context)
 
 #! 미국 잡화 시세 상세 페이지 -> 시세(금액) 평균, 최대, 최소 
-@login_required
 def usa_others_detail(request, id):
     USA_others_post = get_object_or_404(USA_others, pk=id)
     if request.method == "POST":
-        comment_content = request.POST["comment"]
-        comment_number = request.POST.get("number", 0)
-        USA_others_Comment.objects.create(
-            user=request.user,
-            usa_others_post=USA_others_post,
-            content=comment_content,
-            number=comment_number,
-        )
+        if request.user.is_authenticated:
+            comment_content = request.POST["comment"]
+            comment_number = request.POST.get("number", 0)
+            USA_others_Comment.objects.create(
+                user=request.user,
+                usa_others_post=USA_others_post,
+                content=comment_content,
+                number=comment_number,
+            )
+        else:
+            return redirect('savior:accounts:login')
     comments = USA_others_Comment.objects.filter(usa_others_post=USA_others_post)
     
     # 숫자 데이터 리스트 생성
@@ -408,18 +414,20 @@ def vietnam_clothes(request):
     return render(request, "vietnam_clothes.html", context)
 
 #! 베트남 의류 시세 상세 페이지 -> 시세(금액) 평균, 최대, 최소 
-@login_required
 def vietnam_clothes_detail(request, id):
     vietnam_clothes_post = get_object_or_404(Vietnam_clothes, pk=id)
     if request.method == "POST":
-        comment_content = request.POST["comment"]
-        comment_number = request.POST.get("number", 0)
-        Vietnam_clothes_Comment.objects.create(
-            user=request.user,
-            vietnam_clothes_post=vietnam_clothes_post,
-            content=comment_content,
-            number=comment_number,
-        )
+        if request.user.is_authenticated:
+            comment_content = request.POST["comment"]
+            comment_number = request.POST.get("number", 0)
+            Vietnam_clothes_Comment.objects.create(
+                user=request.user,
+                vietnam_clothes_post=vietnam_clothes_post,
+                content=comment_content,
+                number=comment_number,
+            )
+        else:
+            return redirect('savior:accounts:login')
     comments = Vietnam_clothes_Comment.objects.filter(vietnam_clothes_post=vietnam_clothes_post)
     
     # 숫자 데이터 리스트 생성
@@ -450,7 +458,6 @@ def vietnam_foods(request):
     return render(request, "vietnam_foods.html", context)
 
 #베트남 음식 시세 상세 페이지
-@login_required
 def vietnam_foods_detail(request, id):
     return render(request, "vietnam_foods_detail.html")
 
@@ -466,18 +473,20 @@ def vietnam_others(request):
     return render(request, "vietnam_others.html", context)
 
 #! 베트남 잡화 시세 상세 페이지 -> 시세(금액) 평균, 최대, 최소 
-@login_required
 def vietnam_others_detail(request, id):
     vietnam_others_post = get_object_or_404(Vietnam_others, pk=id)
     if request.method == "POST":
-        comment_content = request.POST["comment"]
-        comment_number = request.POST.get("number", 0)
-        Vietnam_others_Comment.objects.create(
-            user=request.user,
-            vietnam_others_post=vietnam_others_post,
-            content=comment_content,
-            number=comment_number,
-        )
+        if request.user.is_authenticated:
+            comment_content = request.POST["comment"]
+            comment_number = request.POST.get("number", 0)
+            Vietnam_others_Comment.objects.create(
+                user=request.user,
+                vietnam_others_post=vietnam_others_post,
+                content=comment_content,
+                number=comment_number,
+            )
+        else:
+            return redirect('savior:accounts:login')
     comments = Vietnam_others_Comment.objects.filter(vietnam_others_post=vietnam_others_post)
     
     # 숫자 데이터 리스트 생성
@@ -546,6 +555,15 @@ def community_tag(request, tag_name):
         "posts": posts,
     }
     return render(request, "community_tag.html", context)
+
+def community_tag_japan(request):
+    return render(request, "community_tag.html")
+
+def community_tag_USA(request):
+    return render(request, "community_tag.html")
+
+def community_tag_vietnam(request):
+    return render(request, "community_tag.html")
 
 def community_post(request):
     if request.method == 'POST':

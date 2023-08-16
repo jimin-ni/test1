@@ -32,6 +32,7 @@
         </div>
       </header>
 
+<<<<<<< HEAD
       <div class="inform">
         <div class="title">
           <p>자유게시판</p>
@@ -139,3 +140,34 @@
     <script src="{% static 'js/go-back-nonclick.js' %}"></script>
   </body>
 </html>
+=======
+    <h1>자유게시판</h1><br>
+    <a href="{% url 'savior:community_tag_japan' %}">#일본</a>
+    <a href="{% url 'savior:community_tag_USA' %}">#미국</a>
+    <a href="{% url 'savior:community_tag_vietnam' %}">#베트남</a>
+    <hr>
+    
+    
+    {% for post in posts %}
+        <!-- 제목 -->
+        <a href="{% url 'savior:community_detail' post.pk %}">{{post.title}}</a><br>
+        <!-- 유저 이름 -->
+        {{ post.user.username }}<br>
+        <!-- 해시태그 -->
+        <!-- {% for tag in post.tags.all %}
+            <a href="{% url 'savior:community_tag' tag_name=tag.name %}">#{{ tag.name }}</a> 
+            {% endfor %}<br> -->
+        <!-- 썸네일 -->
+        {% if post.thumbnail %}
+            <img src="{{post.thumbnail.url}}" alt="">
+        {% endif %}<br>
+        <!-- 좋아요 개수 -->
+        좋아요 개수: {{ post.like_users.count }}
+        <br><br>
+        <hr>
+    {% endfor %}
+    <br><br><br>
+    <a href="{% url 'savior:community_post' %}"><button>글쓰기</button></a>
+</body>
+</html>
+>>>>>>> 133180ca01a01a74c478dad5d045b79e6fbda0a7

@@ -3,6 +3,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 app_name='savior'
 
 urlpatterns = [
@@ -56,6 +57,9 @@ urlpatterns = [
     path('community/', views.community, name='community'),
     path('community_post/', views.community_post, name='community_post'),
     path('community_tag/<str:tag_name>', views.community_tag, name='community_tag'),
+    path('community_tag/일본', views.community_tag_japan, name='community_tag_japan'),
+    path('community_tag/미국', views.community_tag_USA, name='community_tag_USA'),
+    path('community_tag/베트남', views.community_tag_vietnam, name='community_tag_vietnam'),
     path('<int:id>/likes/', views.likes, name='likes'),
     path('community_detail/<int:id>', views.community_detail, name='community_detail'),
     path('community_delete/<int:id>', views.community_delete, name='community_delete'),
