@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'savior',
     'accounts',
+    'admin_thumbnails',
 ]
 
 MIDDLEWARE = [

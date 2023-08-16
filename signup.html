@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Savior Signup</title>
+        <link rel="stylesheet" href="./signup.css" />
+    </head>
+    <body>
+        <div class="top-bar">
+            <div class="top">
+                <button
+                    type="button"
+                    id="back-button"
+                    onclick="location.href='login.html'"
+                >
+                    <img src="./icon_back.png" alt="뒤로가기" />
+                </button>
+                <img src="./icon_user.png" alt="profile" />
+            </div>
+
+            <div class="page-title">Join</div>
+        </div>
+        <hr id="title-hr" />
+
+        <form class="user" method="POST">
+            <!-- {% csrf_token %} -->
+            <div class="email-input">
+                <span class="txt">이메일</span><span class="highlights">*</span>
+                <div id="email-form">
+                    <input
+                        required
+                        maxlength="30"
+                        type="email"
+                        name="email"
+                        placeholder="예: likelion1234@likelion.org"
+                        id="email"
+                    />
+                </div>
+            </div>
+            <div class="name-input">
+                <span class="txt">이름</span><span class="highlights">*</span>
+                <div id="name-form">
+                    <input
+                        required
+                        maxlength="15"
+                        type="text"
+                        name="username"
+                        placeholder="예: savior"
+                        id="name"
+                    />
+                </div>
+            </div>
+            <div class="id-input">
+                <span class="txt">아이디</span><span class="highlights">*</span>
+                <div id="id-form">
+                    <input
+                        required
+                        maxlength="15"
+                        type="text"
+                        name="userid"
+                        placeholder="예: local230714"
+                        id="id"
+                    />
+                </div>
+                <span class="sub-txt">영문과 숫자를 조합하여 6자 이상</span>
+            </div>
+            <div class="pw-input">
+                <span class="txt">비밀번호</span
+                ><span class="highlights">*</span>
+                <div id="pw-form">
+                    <input
+                        required
+                        maxlength="15"
+                        type="password"
+                        name="password"
+                        placeholder="비밀번호를 입력해주세요."
+                        id="pw1"
+                    />
+                </div>
+                <span class="sub-txt"
+                    >영문,숫자,특수문자 중 2개 이상 조합하여 10자 이상</span
+                >
+            </div>
+            <div class="pw-confirm">
+                <span class="txt">비밀번호 확인</span
+                ><span class="highlights">*</span>
+                <div id="pw-form">
+                    <input
+                        required
+                        maxlength="15"
+                        type="password"
+                        name="repeat"
+                        placeholder="위에서 입력한 비밀번호를 한 번 더 입력해주세요."
+                        id="pw2"
+                    />
+                </div>
+                <span class="sub-txt"
+                    >영문,숫자,특수문자 중 2개 이상 조합하여 10자 이상</span
+                >
+            </div>
+
+            <button type="submit" id="signup_btn">회원가입</button>
+        </form>
+
+        <div id="footer">
+            <div class="menu-box">
+                <a href="#"><img src="./icon_exchange.png" alt="환율" /></a>
+            </div>
+            <div class="menu-box">
+                <a href="#"><img src="./icon_food.png" alt="식당" /></a>
+            </div>
+            <div class="menu-box">
+                <a href="#"><img src="./icon_map.png" alt="지도" /></a>
+            </div>
+            <div class="menu-box">
+                <a href="#"><img src="./icon_shopping.png" alt="쇼핑" /></a>
+            </div>
+            <div class="menu-box">
+                <a href="#"
+                    ><img src="./icon_community.png" alt="커뮤니티"
+                /></a>
+            </div>
+        </div>
+    </body>
+</html>
