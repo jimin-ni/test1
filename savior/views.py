@@ -140,7 +140,7 @@ def japan_weather():
 
     clouds_info = data.get('weather', [{'main': 'N/A'}])[0]['main']  # 하늘 상태
     icon_info = data.get('weather', [{'icon': 'N/A'}])[0]['icon']  # 아이콘
-    temperature = data.get('main', {'temp': 'N/A'})['temp']  # 기온
+    temperature = int(data.get('main', {'temp': 'N/A'})['temp'])  # 기온
 
     return clouds_info, icon_info, temperature
 
