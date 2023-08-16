@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Savoir 마이페이지</title>
+        <link rel="stylesheet" href="./mypage.css" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/swiper/swiper-bundle.min.css"
+        />
+    </head>
+    <body>
+        <div class="top-bar">
+            <div class="top">
+                <button
+                    type="button"
+                    id="back-button"
+                    onclick="location.href='login.html'"
+                >
+                    <img src="./icon_back.png" alt="뒤로가기" />
+                </button>
+                <img src="./icon_user.png" alt="profile" />
+            </div>
+
+            <div class="page-title">MyPage</div>
+        </div>
+        <hr id="title-hr" />
+
+        <div id="mention">
+            <h3><span id="user-name">00</span>님, 반갑습니다</h3>
+        </div>
+
+        <div id="contries-area" class="area-box">
+            <h4 class="titles">Contries<span class="title-icon">icon</span></h4>
+            <hr />
+
+            <div class="swiper-container">
+                <!-- If we need navigation buttons -->
+                <div
+                    class="swiper-button-prev"
+                    style="top: 36vh; left: 18vw; color: #000"
+                ></div>
+                <div
+                    class="swiper-button-next"
+                    style="top: 36vh; right: 18vw; color: #000"
+                ></div>
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="./icon_back.png" alt="" /><br />미국
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./icon_back.png" alt="" /><br />일본
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./icon_back.png" alt="" /><br />베트남
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="./icon_back.png" alt="" /><br />
+                        4번
+                    </div>
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination" style="position: static"></div>
+            </div>
+        </div>
+
+        <div id="posts-area" class="area-box">
+            <h4 class="titles">Posts<span class="title-icon">icon</span></h4>
+            <hr />
+
+            <div class="post-box">
+                <div class="post-info-top">
+                    <p>작성자</p>
+                    <p>작성날짜/시간</p>
+                </div>
+                <div class="post-info-main">
+                    <p id="post-title">post title</p>
+                    <p>수정날짜/시간</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="comments-area" class="area-box">
+            <h4 class="titles">Comments<span class="title-icon">icon</span></h4>
+            <hr />
+
+            <div class="comment-box">
+                <div class="comment-info-top">
+                    <p>작성자</p>
+                    <p>작성날짜/시간</p>
+                </div>
+                <div class="comment-info-main">
+                    <p id="comment-title">comment title</p>
+                    <p>수정날짜/시간</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="menu-box">
+                <a href="#"><img src="./icon_exchange.png" alt="환율" /></a>
+            </div>
+            <div class="menu-box">
+                <a href="#"><img src="./icon_food.png" alt="식당" /></a>
+            </div>
+            <div class="menu-box">
+                <a href="#"><img src="./icon_map.png" alt="지도" /></a>
+            </div>
+            <div class="menu-box">
+                <a href="#"><img src="./icon_shopping.png" alt="쇼핑" /></a>
+            </div>
+            <div class="menu-box">
+                <a href="#"
+                    ><img src="./icon_community.png" alt="커뮤니티"
+                /></a>
+            </div>
+        </div>
+
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="./mypage.js"></script>
+    </body>
+</html>
