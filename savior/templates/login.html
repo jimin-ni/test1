@@ -17,21 +17,7 @@
         {% block content %}
     </head>
     <body>
-        <!-- <h1>로그인 페이지</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div>
-                {{ form.as_p }}
-                <div>
-                    <input type="submit" />
-                </div>
-            </div>
 
-            <a href="{% url 'savior:users:kakao_login' %}">
-                login with Kakao
-            </a>
-        </form>
-        <a href="{% url 'savior:accounts:password_reset' %}">비밀번호 찾기</a> -->
 
         <div class="container">
             <div class="background"></div>
@@ -67,37 +53,30 @@
                     enctype="multipart/form-data"
                 >
                     {% csrf_token %}
+
+
+
                     <div class="id-input">
                         <span class="txt">아이디</span>
+
                         <div id="id-form">
-                            <input
-                                required
-                                maxlength="15"
-                                type="text"
-                                name="userid"
-                                placeholder="예: local230714"
-                                id="id"
-                            />
+                            {{form.username}}
                         </div>
                     </div>
                     <div class="pw-input">
                         <span class="txt">비밀번호</span>
+                        
                         <div id="pw-form">
-                            <input
-                                required
-                                maxlength="15"
-                                type="password"
-                                name="password"
-                                placeholder="비밀번호를 입력해주세요."
-                                id="pw1"
-                            />
+                            {{form.password}}
+
+                            
+                            
                         </div>
                     </div>
 
+
                     <div id="find-info">
-                        <div id="find-id">
-                            <a href="./find_id_1.html">아이디 찾기</a>
-                        </div>
+
                         <div id="find-pw">
                             <a href="{% url 'savior:accounts:password_reset' %}"
                                 >비밀번호 찾기</a
@@ -105,7 +84,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" id="login_btn">로그인</button>
+                    <input type="submit" id="login_btn" value="로그인"></input>
                 </form>
                 <div id="goTo">
                     <span id="question">Savior 계정이 없으신가요?</span>
@@ -150,6 +129,6 @@
         <script src="{% static 'js/go-back.js' %}"></script>
         <script src="{% static 'js/go-back-nonclick.js' %}"></script>
 
-        {% endblock %}
+        {% endblock %} 
     </body>
 </html>
