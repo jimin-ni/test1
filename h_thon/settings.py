@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'savior',
     'accounts',
     'admin_thumbnails',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
