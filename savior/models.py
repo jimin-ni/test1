@@ -6,13 +6,14 @@ from django.conf import settings
 # Create your models here.
 
 #일본
-class Japan_clothes(models.Model):
+class Japan_clothes(models.Model):  
     japan_clothes = models.CharField(max_length=10)
 
     def __str__(self):
         return self.japan_clothes
 
-class Japan_clothes_Comment(models.Model):
+#* 시세 입력 페이지
+class Japan_clothes_Comment(models.Model):  
     user = models.ForeignKey(
         "users.User",
         verbose_name="일본 의류 시세 댓글 작성자",
@@ -20,7 +21,7 @@ class Japan_clothes_Comment(models.Model):
     )
     japan_clothes_post = models.ForeignKey(Japan_clothes, verbose_name="일본 의류 시세 댓글", on_delete=models.CASCADE)
     content = models.TextField("내용")
-    number = models.IntegerField("숫자")
+    number = models.IntegerField("숫자") #! 금액 입력 창 
 
 class Japan_foods(models.Model):
     japan_foods = models.CharField(max_length=10)
@@ -28,6 +29,7 @@ class Japan_foods(models.Model):
     def __str__(self):
         return self.japan_foods
     
+    #* 일본 시세 입력 페이지
 class Japan_foods_Comment(models.Model):
     user = models.ForeignKey(
         "users.User",
@@ -83,6 +85,8 @@ class USA_others(models.Model):
     def __str__(self):
         return self.usa_others
     
+    
+    #* 미국 잡화 시세 입력 페이지
 class USA_others_Comment(models.Model):
     user = models.ForeignKey(
         "users.User",
@@ -100,6 +104,7 @@ class Vietnam_clothes(models.Model):
     def __str__(self):
         return self.vietnam_clothes
     
+    #* 시세 입력 페이지
 class Vietnam_clothes_Comment(models.Model):
     user = models.ForeignKey(
         "users.User",
