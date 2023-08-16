@@ -6,7 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="{% url 'savior:USA' %}">뒤로가기</a>
+    <a href="{% url 'savior:USA' %}">뒤로가기</a><br>
+    <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
+
+    
+    <form action="{% url 'savior:exchange' %}" method="POST">
+        {% csrf_token %}
+        <select name="country"> 
+            <option value="">--국가 선택--</option> 
+            <option value="japan">일본</option> 
+            <option value="USA">미국</option> 
+            <option value="vietnam">베트남</option> 
+        </select>
+        <input type="submit" value="선택">
+    </form>
+
     <br>
     미국 환율계산기
     <br>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {width: 100px; height: 100px;}
+    </style>
+</head>
+<body>
+    <a href="{% url 'savior:community' %}">뒤로가기</a><br>
+    <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
+
+    <!-- 글 -->
+    <h3>{{post.title}}</h3>
+    <p>{{post.content}}</p>
+    <p>{{post.created}}</p><br>
+    {% if post.thumbnail %}
+        <img src="{{post.thumbnail.url}}" alt="">
+    {% endif %}<br><br>
+
+    <p>좋아요 개수: {{ post.like_users.count }}</p>
+    <form action="{% url 'savior:likes' post.pk %}" method='POST'>
+        {% csrf_token %}
+            {% if user in post.like_users.all %}
+                <input type="submit" value='좋아요 취소'>
+            {% else %}
+                <input type="submit" value='좋아요'>
+            {% endif %}
+    </form><br><br>
+    
+
+    {% if user.is_authenticated and user == post.user %}
+        <a href="{% url 'savior:community_delete' post.pk %}"><button>삭제</button></a>
+    {% endif %}
+    <br><br><br>
+
+    <!-- 댓글 -->
+    <hr>
+    {% for comment in post.comment_set.all %}
+        {{ comment.user.username }}<br>
+        {{ comment.content }}<br>
+        {{ comment.created }}
+        <br><br>
+    {% endfor %}
+
+    <br><br><br><br>
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="comment"></textarea>
+        <button type="submit">등록</button>
+    </form>
+</body>
+</html>

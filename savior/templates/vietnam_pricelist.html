@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'savior:main' %}">뒤로가기</a><br>
+    <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
+    
+    <h2>주요 물품의 시세</h2>
+    베트남<br><br>
+    
+    <form action="{% url 'savior:pricelist' %}" method="POST">
+        {% csrf_token %}
+        <select name="country"> 
+            <option value="">--국가 선택--</option> 
+            <option value="japan">일본</option> 
+            <option value="USA">미국</option> 
+            <option value="vietnam">베트남</option> 
+        </select>
+        <input type="submit" value="선택">
+    </form>
+    <br>
+    <a href="{% url 'savior:vietnam_clothes' %}">의류</a><br>
+    <a href="{% url 'savior:vietnam_foods' %}">음식</a><br>
+    <a href="{% url 'savior:vietnam_others' %}">잡화</a><br>
+</body>
+</html>

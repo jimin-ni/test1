@@ -12,9 +12,10 @@ class UserCreateForm(UserBaseForm):
     password2 = forms.CharField(widget=forms.PasswordInput())
     class Meta(UserBaseForm.Meta):
         fields = ['username', 'email', 'password']
-        
+
 #* 기존 제공 form(이메일 포함)
 class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ['username', 'email']
+	

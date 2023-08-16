@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'savior:japan_others' %}">뒤로가기</a><br>
+    <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
+
+    <h3>{{japan_others_post.japan_others}}</h3>
+    <hr>
+    {% for comment in japan_others_post.japan_others_comment_set.all %}
+        {{ comment.content }}<br>
+        {{ comment.number }}
+        <br><br>
+    {% endfor %}
+    
+        <!-- 계산된 값 표시 -->
+        <h2>시세 분석</h2>
+        <p>평균 금액: {{ average_number }}</p>
+        <p>최대 금액: {{ max_number }}</p>
+        <p>최소 금액: {{ min_number }}</p>
+
+    <br><br><br><br>
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="comment"></textarea><br>
+        <input type="number" name="number" placeholder="가격을 입력하세요">
+        <button type="submit">등록</button>
+    </form>
+</body>
+</html>
