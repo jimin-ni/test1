@@ -38,8 +38,6 @@ def random_nickname(length=4, allowed_chars="가나다라마바사아자차카�
 random_nickname = random_nickname() #* 랜덤 닉네임 호출 
 
 def kakao_login_callback(request):
-    
-
     try:
         if request.user.is_authenticated:
             raise SocialLoginException("User already logged in")
@@ -79,10 +77,13 @@ def kakao_login_callback(request):
         profile = kakao_account.get("profile")
         
         # nickname = profile.get("nickname", None) #! profile 변수가 none 이라고 인식해 get() 메서드 호출 불가 오류
-        # nickname = kakao_account.get("nickname", None) #! 위에 오류 해결해보려고 
-        # nickname = kakao_account.get("profile_nickname", None) #! ID 값을 카카오개발자 문서에 작성된 것으로 수정. 하지만 None을 불러옴.
-        nickname = kakao_account.get("profile_nickname", random_nickname) #! 랜덤 닉네임 호출 
-        name = kakao_account.get("name", random_nickname) #! 랜덤 닉네임 호출 하는 네임 
+        # nickname = kakao_account.get("nickname", None) #! 위에 오류 해결해보려고 ok
+        nickname = kakao_account.get("nickname", "Jimin") #! 위에 오류 해결해보려고 ok
+        # nickname = kakao_account.get("profile_nickname", random_nickname) #! ID 값을 카카오개발자 문서에 작성된 것으로 수정. 하지만 None을 불러옴.
+        # nickname = kakao_account.get("profile_nickname", random_nickname) #! 랜덤 닉네임 호출 
+        # name = kakao_account.get("name", random_nickname) #! 랜덤 닉네임 호출 하는 네임 
+        # name = kakao_account.get("name", None) #! 랜덤 닉네임 호출 하는 네임 ok
+        name = kakao_account.get("name", "Jimin") #! 랜덤 닉네임 호출 하는 네임 ok
         # avatar_url = profile.get("profile_image_url", None)
         
         # email = kakao_account.get("email", None)
@@ -102,11 +103,11 @@ def kakao_login_callback(request):
                 raise GithubException(f"Please login with {user.login_method}")
         else:
             # user = models.User.objects.create_user(
-            # user = User.objects.create_user(
-            user = User.create_user(
+            user = User.objects.create_user(
+            # user = User.create_user(
                 email=email,
                 username=nickname,
-                name=name,
+                # name=name,
                 # username=slugify(nickname),  # 카카오 닉네임을 slugify하여 username으로 사용
                 first_name=slugify(nickname),   #  NOT NULL constraint failed 오류 발생으로 sluglify 함수이용
                 # login_method=models.User.LOGIN_KAKAO,

@@ -8,7 +8,6 @@ app_name='savior'
 
 urlpatterns = [
     path('', views.main , name='main'),
-    path('accounts/', include('accounts.urls', namespace='accounts')),
     path('pricelist/', views.pricelist , name='pricelist'),
     path('exchange/', views.exchange , name='exchange'),
 
