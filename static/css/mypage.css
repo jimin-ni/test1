@@ -23,9 +23,11 @@ body {
     margin: 0 auto;
 }
 
+a,
 a:link,
 a:visited {
     text-decoration: none;
+    color: #000;
 }
 
 p {
@@ -229,10 +231,7 @@ p {
 .post-info-top > p {
     margin: 0;
     font-size: 10px;
-}
-
-.post-info-top > p:last-child {
-    margin-left: 2vw;
+    margin-left: 50px;
 }
 
 .post-info-main {
@@ -275,10 +274,7 @@ p {
 .comment-info-top > p {
     margin: 0;
     font-size: 10px;
-}
-
-.comment-info-top > p:last-child {
-    margin-left: 2vw;
+    margin-left: 50px;
 }
 
 .comment-info-main {
