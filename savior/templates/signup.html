@@ -62,101 +62,36 @@
                 >
                     {% csrf_token %}
 
-                    <p> id 입력</p>
-                    {{ form.username }}
-                    <p> 이메일 입력</p>
-                    {{ form.email }}
-                    <p> 비번 입력</p>
-                    {{ form.password1 }}
-                    <p> 비번 입력2</p>
-                    {{ form.password2 }}
-                    <input type="submit" />
-                
-
-                    <!-- <div class="email-input">
-                        <span class="txt">이메일</span
-                        ><span class="highlights">*</span>
-                        <div id="email-form">
-                            <input
-                                required
-                                maxlength="30"
-                                type="email"
-                                name="email"
-                                placeholder="예: likelion1234@likelion.org"
-                                id="email"
-                            />
-                        </div>
-                    </div>
-                    <div class="name-input">
-                        <span class="txt">이름</span
-                        ><span class="highlights">*</span>
-                        <div id="name-form">
-                            <input
-                                required
-                                maxlength="15"
-                                type="text"
-                                name="username"
-                                placeholder="예: savior"
-                                id="name"
-                            />
-                        </div>
-                    </div>
                     <div class="id-input">
                         <span class="txt">아이디</span
                         ><span class="highlights">*</span>
-                        <div id="id-form">
-                            <input
-                                required
-                                maxlength="15"
-                                type="text"
-                                name="userid"
-                                placeholder="예: local230714"
-                                id="id"
-                            />
-                        </div>
-                        <span class="sub-txt"
-                            >영문과 숫자를 조합하여 6자 이상</span
-                        >
+                        <div id="id-form">{{ form.username }}</div>
+                        
                     </div>
+
+
+                    <div class="email-input">
+                        <span class="txt">이메일</span
+                        ><span class="highlights">*</span>
+                        <div id="email-form">{{ form.email }}</div>
+                    </div>
+
+                    
                     <div class="pw-input">
                         <span class="txt">비밀번호</span
                         ><span class="highlights">*</span>
-                        <div id="pw-form">
-                            <input
-                                required
-                                maxlength="15"
-                                type="password"
-                                name="password"
-                                placeholder="비밀번호를 입력해주세요."
-                                id="pw1"
-                            />
-                        </div>
-                        <span class="sub-txt"
-                            >영문,숫자,특수문자 중 2개 이상 조합하여 10자
-                            이상</span
-                        >
+                        <div id="pw-form">{{ form.password1 }}</div>
+                        
                     </div>
                     <div class="pw-confirm">
                         <span class="txt">비밀번호 확인</span
                         ><span class="highlights">*</span>
-                        <div id="pw-form">
-                            <input
-                                required
-                                maxlength="15"
-                                type="password"
-                                name="repeat"
-                                placeholder="위에서 입력한 비밀번호를 한 번 더 입력해주세요."
-                                id="pw2"
-                            />
-                        </div>
-                        <span class="sub-txt"
-                            >영문,숫자,특수문자 중 2개 이상 조합하여 10자
-                            이상</span
-                        >
+                        <div id="pw-form">{{ form.password2 }}</div>
+                        
                     </div>
 
-                    <button type="submit" id="signup_btn">회원가입</button>
-                </form> -->
+                    <input type="submit" id="signup_btn" value="회원가입"></input>
+                </form>
             </section>
 
             <navigation class="nav">
@@ -183,129 +118,3 @@
         {% endblock %}
     </body>
 </html>
-
-
-
-<!--  -->
-<div class="container">
-    <div class="background"></div>
-    <header class="hd">
-        <div class="hd-back">
-            <img
-                src="{% static 'image/nav/back.svg' %}"
-                style="height: 30px"
-                onclick="goBack()"
-            />
-        </div>
-        <div class="hd-logo">
-            <img src="{% static 'image/savior.png' %}./" />
-        </div>
-        <div class="hd-profile">
-            <a href="">
-                <img src="{% static 'image/nav/user_color.png' %}"
-            /></a>
-        </div>
-    </header>
-
-    <div class="inform">
-        <div class="title">
-            <p>Login</p>
-        </div>
-    </div>
-
-    <section class="sec">
-        <form
-            class="user"
-            action=""
-            method="POST"
-            enctype="multipart/form-data"
-        >
-            {% csrf_token %}
-            <div>
-                <p>아이디 입력</p>
-                {{form.username}}
-                <p>비번 입력</p>
-                {{form.password}}
-                <div>
-                    <input type="submit" />
-                </div>
-            </div>
-            <div class="id-input">
-                <span class="txt">아이디</span>
-                <div id="id-form">
-                    <input
-                        required
-                        maxlength="15"
-                        type="text"
-                        name="userid"
-                        placeholder="예: local230714"
-                        id="id"
-                    />
-                </div>
-            </div>
-            <div class="pw-input">
-                <span class="txt">비밀번호</span>
-                <div id="pw-form">
-                    <input
-                        required
-                        maxlength="15"
-                        type="password"
-                        name="password"
-                        placeholder="비밀번호를 입력해주세요."
-                        id="pw1"
-                    />
-                </div>
-            </div>
-
-            <div id="find-info">
-                <div id="find-id">
-                    <a href="./find_id_1.html">아이디 찾기</a>
-                </div>
-                <div id="find-pw">
-                    <a href="{% url 'savior:accounts:password_reset' %}"
-                        >비밀번호 찾기</a
-                    >
-                </div>
-            </div>
-
-            <button type="submit" id="login_btn">로그인</button>
-        </form>
-        <div id="goTo">
-            <span id="question">Savior 계정이 없으신가요?</span>
-            <a href="{% url 'savior:accounts:signup' %}" id="goToSignup"
-                >회원가입</a
-            >
-        </div>
-
-        <div id="kakao-login-box">
-            <a
-                href="{% url 'savior:users:kakao_login' %}"
-                id="kakao-login"
-            >
-                <img
-                    src="{% static 'image/icon/kakao-talk.png'%}"
-                    alt="kakao_login"
-                />
-                <span>카카오로 시작하기</span>
-            </a>
-        </div>
-    </section>
-
-    <navigation class="nav">
-        <a href="{% url 'savior:exchange' %}"
-            ><img src="{% static 'image/nav/money.svg' %}"
-        /></a>
-        <a href="#"><img src="{% static 'image/nav/eat.png' %}" /></a>
-        <a href="#"
-            ><img
-                src="{% static 'image/nav/pin_color.png' %}"
-                style="height: 45px"
-        /></a>
-        <a href="{% url 'savior:pricelist' %}"
-            ><img src="{% static 'image/nav/tag_color.png' %}"
-        /></a>
-        <a href="{% url 'savior:community' %}"
-            ><img src="{% static 'image/nav/edit-message.png' %}"
-        /></a>
-    </navigation>
-</div>

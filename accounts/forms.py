@@ -36,4 +36,17 @@ class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ['username', 'email']
+        widgets = {
+            'username': TextInput(attrs={
+                'class': "form-control",
+                'style': 'width: 320px;',
+                'placeholder': '예) savior'
+                }),
+            'email': EmailInput(attrs={
+                'class': "form-control",
+                'style': 'width: 320px;',
+                'placeholder': '예) savior@likelion.org'
+                }),
+            
+        }
 	
