@@ -18,9 +18,9 @@
     {% for post in posts %}
         <a href="{% url 'savior:community_detail' post.pk %}">{{post.title}}</a><br>
         {{ post.user.username }}<br>
-        {% for tag in post.tags.all %}
+        <!-- {% for tag in post.tags.all %}
             #{{ tag.name }}
-            {% endfor %}<br>
+            {% endfor %}<br> -->
         {% if post.thumbnail %}
             <img src="{{post.thumbnail.url}}" alt="">
         {% endif %}<br>
