@@ -79,11 +79,10 @@ def kakao_login_callback(request):
         # nickname = profile.get("nickname", None) #! profile 변수가 none 이라고 인식해 get() 메서드 호출 불가 오류
         # nickname = kakao_account.get("nickname", None) #! 위에 오류 해결해보려고 ok
         nickname = kakao_account.get("nickname", "Jimin") #! 위에 오류 해결해보려고 ok
-        # nickname = kakao_account.get("profile_nickname", random_nickname) #! ID 값을 카카오개발자 문서에 작성된 것으로 수정. 하지만 None을 불러옴.
         # nickname = kakao_account.get("profile_nickname", random_nickname) #! 랜덤 닉네임 호출 
         # name = kakao_account.get("name", random_nickname) #! 랜덤 닉네임 호출 하는 네임 
-        # name = kakao_account.get("name", None) #! 랜덤 닉네임 호출 하는 네임 ok
-        name = kakao_account.get("name", "Jimin") #! 랜덤 닉네임 호출 하는 네임 ok
+        name = kakao_account.get("name", None) #! 랜덤 닉네임 호출 하는 네임 ok 
+        # name = kakao_account.get("name", "Jimin") #! 랜덤 닉네임 호출 하는 네임 ok
         # avatar_url = profile.get("profile_image_url", None)
         
         # email = kakao_account.get("email", None)
@@ -95,7 +94,7 @@ def kakao_login_callback(request):
         # gender = kakao_account.get("gender", None)
 
 #kakao로 로그인을 하려는 user의 이메일 계정이 이미 회원가입이 되었는지를 확인
-        # # user = models.User.objects.get_or_none(email=email) 
+        # user = models.User.objects.get_or_none(email=email) 
         user = User.objects.get_or_none(email=email) #* 커스텀된 User 모델 이용
         if user is not None:
             # if user.login_method != models.User.LOGIN_KAKAO:
