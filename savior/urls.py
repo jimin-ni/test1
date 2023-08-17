@@ -10,6 +10,8 @@ urlpatterns = [
     path('', views.main , name='main'),
     path('pricelist/', views.pricelist , name='pricelist'),
     path('exchange/', views.exchange , name='exchange'),
+    path('map/', views.map , name='map'),
+    path('intro/', views.intro , name='intro'),
 
     #일본
     path('japan/', views.japan , name='japan'),

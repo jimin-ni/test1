@@ -49,7 +49,7 @@
                         {% csrf_token %}
                         <!-- changeCountry -->
                         <select name="country" id="input-dropdown">
-                            <option  disabled value="">나라 선택</option>
+                            <option  disabled value="">국가 선택</option>
                             <option selected value="japan">Japan</option>
                             <option value="USA">USA</option>
                             <option value="vietnam">Vietnam</option>
@@ -125,21 +125,11 @@
             </section>
 
             <navigation class="nav">
-                <a href="{% url 'savior:exchange' %}"
-                    ><img src="{% static 'image/nav/money.svg' %}"
-                /></a>
+                <a href="{% url 'savior:exchange' %}"><img src="{% static 'image/nav/money.svg' %}" /></a>
                 <a href="#"><img src="{% static 'image/nav/eat.png' %}" /></a>
-                <a href="#"
-                    ><img
-                        src="{% static 'image/nav/pin_color.png' %}"
-                        style="height: 45px"
-                /></a>
-                <a href="{% url 'savior:pricelist' %}"
-                    ><img src="{% static 'image/nav/tag_color.png' %}"
-                /></a>
-                <a href="{% url 'savior:community' %}"
-                    ><img src="{% static 'image/nav/edit-message.png' %}"
-                /></a>
+                <a href="{% url 'savior:map' %}"><img src="{% static 'image/nav/pin_color.png' %}" style="height: 45px"/></a>
+                <a href="{% url 'savior:pricelist' %}"><img src="{% static 'image/nav/tag_color.png' %}" /></a>
+                <a href="{% url 'savior:community' %}"><img src="{% static 'image/nav/edit-message.png' %}" /></a>
             </navigation>
         </div>
         <script src="{% static 'js/exchange.js' %}"></script>
