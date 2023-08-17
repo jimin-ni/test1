@@ -93,6 +93,7 @@ hr {
 .submit {
   display: flex;
   justify-content: center;
+  padding-bottom: 20%;
 }
 
 .submit-button {
