@@ -66,7 +66,7 @@
                         <div id="visit-country"> 
                             <div id="input">
                                 <div id="result-main">
-                                    <input type="number" class="exchange-input"/>
+                                    <input type="number" class="exchange-input" id="btn_1"/>
                                 </div>
                                 
                             </div>
@@ -93,6 +93,7 @@
                     placeholder="원"
                     class="exchange-result"
                     value="{{ KRW|default:'' }}"
+                    id="btn_2"
                 />
 
                                 </div>
@@ -101,7 +102,7 @@
 
 
                     <div>
-                        <button type="submit" class="calc_btn">환율 계산</button>
+                        <button type="submit" class="calc_btn" id="btn_3">환율 계산</button>
                     </div>
                 </div>
                 </form>
