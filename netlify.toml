@@ -1,0 +1,14 @@
+[build]
+    command = "python manage.py collectstatic --noinput"
+
+command = "python manage.py collectstatic --noinput"
+publish = "./static"  # 정적 파일의 경로
+exclude = [
+    "./myvenv/*",
+    "./myvenv/Lib/site-packages/pandas/tests/io/data/legacy_pickle/1.2.4/empty_frame_v1_2_4-GH#42345.pkl"
+     ]
+
+[build.environment]
+DJANGO_SETTINGS_MODULE = "h_thon.settings"
+
+site = "ds-savior"
