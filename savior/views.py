@@ -20,15 +20,24 @@ from crawling_Vietnam import main_function_vietnam  # crawling.py 파일의 main
 from crawling_Japan import main_function_japan
 import math
 
+#인트로 맵 페이지
+def intro(request):
+    return render(request, "intro.html")
+
 #임시용 메인페이지
 def main(request):
     return render(request, "main.html")
+
+#메인 맵 페이지
+def map(request):
+    return render(request, "map.html")
+
 
 #nav바 시세 선택 페이지
 def pricelist(request):
     if request.method == 'POST':
         country = request.POST.get('country')
-        if country=='japan':
+        if country=='Japan':
             return redirect('savior:japan_pricelist')
         elif country=='USA':
             return redirect('savior:USA_pricelist')

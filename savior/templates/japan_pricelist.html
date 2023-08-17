@@ -119,7 +119,66 @@
                 /></a>
             </navigation>
         </div>
+<<<<<<< HEAD
         <script src="{% static 'js/go-back.js' %}"></script>
         <script src="{% static 'js/go-back-nonclick.js' %}"></script>
     </body>
+=======
+      </div>
+
+      <section class="sec">
+        <form action="{% url 'savior:pricelist' %}" method="POST">
+          <div id="input-unit">
+            <!-- changeCountry -->
+            {% csrf_token %}
+            <select name="country" id="input-dropdown">
+              <option selected disabled value="">나라 선택</option>
+              <option value="Japan">
+                <img src="{% static 'image/icon/yen.png' %}" alt="Japan" />
+                Japan
+              </option>
+              <option value="USA">
+                <img src="{% static 'image/icon/dollar.png' %}" alt="USA" />
+                USA
+              </option>
+              <option value="Vietnam">
+                <img src="{% static 'image/icon/dong.png' %}" alt="Vietnam" />
+                Vietnam
+              </option>
+            </select>
+            <input type="submit" value="선택" id="submit_btn" />
+          </div>
+        </form>
+
+        <div class="pricebtn">
+          <button type="button" onclick="" class="buttons">
+            <img src="{% static 'image/icon/cloth.png' %}" /><span
+              ><a href="{% url 'savior:japan_clothes' %}">의류</a></span
+            >
+          </button>
+          <button type="button" onclick="" class="buttons">
+            <img src="{% static 'image/icon/food.svg' %}" /><span
+              ><a href="{% url 'savior:japan_foods' %}">음식</a></span
+            >
+          </button>
+          <button type="button" onclick="" class="buttons">
+            <img src="{% static 'image/icon/gift-card.png' %}" /><span
+              ><a href="{% url 'savior:japan_others' %}">잡화</a></span
+            >
+          </button>
+        </div>
+      </section>
+
+      <navigation class="nav">
+        <a href="{% url 'savior:exchange' %}"><img src="{% static 'image/nav/money.svg' %}" /></a>
+        <a href="#"><img src="{% static 'image/nav/eat.png' %}" /></a>
+        <a href="{% url 'savior:map' %}"><img src="{% static 'image/nav/pin_color.png' %}" style="height: 45px"/></a>
+        <a href="{% url 'savior:pricelist' %}"><img src="{% static 'image/nav/tag_color.png' %}" /></a>
+        <a href="{% url 'savior:community' %}"><img src="{% static 'image/nav/edit-message.png' %}" /></a>
+      </navigation>
+    </div>
+    <script src="{% static 'js/go-back.js' %}"></script>
+    <script src="{% static 'js/go-back-nonclick.js' %}"></script>
+  </body>
+>>>>>>> e9e48737c811262be5e6d3a87f4335ec669b81ca
 </html>
