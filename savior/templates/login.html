@@ -1,24 +1,134 @@
+{% load static %}
 <!--* 회원가입 페이지  -->
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인</title>
-    {% block content %}
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Savoir : Login</title>
+        <link rel="stylesheet" href="{% static 'css/login.css' %}" />
 
-</head>
-<body>
-    <h1>로그인 페이지</h1>
-    <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div>
-        {{ form.as_p }}
-        <div>
-            <input type="submit">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Judson&display=swap"
+            rel="stylesheet"
+        />
+        {% block content %}
+    </head>
+    <body>
+
+
+        <div class="container">
+            <div class="background"></div>
+            <header class="hd">
+                <div class="hd-back">
+                    <img
+                        src="{% static 'image/nav/back.svg' %}"
+                        style="height: 30px"
+                        onclick="goBack()"
+                    />
+                </div>
+                <div class="hd-logo">
+                    <img src="{% static 'image/savior.png' %}./" />
+                </div>
+                <div class="hd-profile">
+                    <a href="">
+                        <img src="{% static 'image/nav/user_color.png' %}"
+                    /></a>
+                </div>
+            </header>
+
+            <div class="inform">
+                <div class="title">
+                    <p>Login</p>
+                </div>
+            </div>
+
+            <section class="sec">
+                <form
+                    class="user"
+                    action=""
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+                    {% csrf_token %}
+
+
+
+                    <div class="id-input">
+                        <span class="txt">아이디</span>
+
+                        <div id="id-form">
+                            {{form.username}}
+                        </div>
+                    </div>
+                    <div class="pw-input">
+                        <span class="txt">비밀번호</span>
+                        
+                        <div id="pw-form">
+                            {{form.password}}
+
+                            
+                            
+                        </div>
+                    </div>
+
+
+                    <div id="find-info">
+
+                        <div id="find-pw">
+                            <a href="{% url 'savior:accounts:password_reset' %}"
+                                >비밀번호 찾기</a
+                            >
+                        </div>
+                    </div>
+
+                    <input type="submit" id="login_btn" value="로그인"></input>
+                </form>
+                <div id="goTo">
+                    <span id="question">Savior 계정이 없으신가요?</span>
+                    <a href="{% url 'savior:accounts:signup' %}" id="goToSignup"
+                        >회원가입</a
+                    >
+                </div>
+
+                <div id="kakao-login-box">
+                    <a
+                        href="{% url 'savior:users:kakao_login' %}"
+                        id="kakao-login"
+                    >
+                        <img
+                            src="{% static 'image/icon/kakao-talk.png'%}"
+                            alt="kakao_login"
+                        />
+                        <span>카카오로 시작하기</span>
+                    </a>
+                </div>
+            </section>
+
+            <navigation class="nav">
+                <a href="{% url 'savior:exchange' %}"
+                    ><img src="{% static 'image/nav/money.svg' %}"
+                /></a>
+                <a href="#"><img src="{% static 'image/nav/eat.png' %}" /></a>
+                <a href="#"
+                    ><img
+                        src="{% static 'image/nav/pin_color.png' %}"
+                        style="height: 45px"
+                /></a>
+                <a href="{% url 'savior:pricelist' %}"
+                    ><img src="{% static 'image/nav/tag_color.png' %}"
+                /></a>
+                <a href="{% url 'savior:community' %}"
+                    ><img src="{% static 'image/nav/edit-message.png' %}"
+                /></a>
+            </navigation>
         </div>
-    </div>
-</form>
-{% endblock %}
-</body>
+
+        <script src="{% static 'js/go-back.js' %}"></script>
+        <script src="{% static 'js/go-back-nonclick.js' %}"></script>
+
+        {% endblock %} 
+    </body>
 </html>

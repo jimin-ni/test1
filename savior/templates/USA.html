@@ -1,21 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>미국 상세페이지</title>
-</head>
-<body>
-    <a href="{% url 'savior:main' %}">뒤로가기</a><br>
-    실시간 환율: {{ exchange_rate }}달러 <br>
-    <a href="{% url 'savior:USA_exchange' %}">환율계산기</a><br>
-    <span>
-        워싱턴 D.C. 날씨 정보<br>
-        하늘: {{ clouds_info }}
-        기온: {{ temperature }}°C
-        아이콘: {{ icon_info }}
-        <!-- https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
-            프론트 분이 아이콘 정보에 따른 사진 처리해주시면 될 거 같아요! -->
-    </span>
-</body>
-</html>
+{% extends 'base.html' %} {% load static %} {% block title %}미국{% endblock %}
+{% block extra-style %}
+<link rel="stylesheet" href="{% static 'css/usa_functions.css' %}" />
+{% endblock %} {% block back %}
+<a href="{% url 'savior:main' %}"
+  ><img src="{% static 'image/nav/back.svg' %}" style="height: 30px"
+/></a>
+{% endblock %} {% block content %}
+<section class="sec">
+  <div class="title">
+    <!-- 국기 & 나라명 -->
+    <div class="country">
+      <img src="{% static 'image/flag/USA.png' %}" />
+      <p>미국</p>
+    </div>
+    <!-- 스크랩 -->
+    <div class="star" onclick="toggleStarImage()">
+      <img src="{% static 'image/icon/star-line.svg' %}" />
+    </div>
+  </div>
+
+  <div class="informations">
+    <div class="inform-title">
+      <p>INFORMATIONS</p>
+    </div>
+    <!-- 환율 & 날씨 -->
+    <div class="inform-exchange-weather">
+      <!-- 환율 -->
+      <div class="exchange">
+        <!-- 기호 & 나라별 -->
+        <div class="ex">
+          <img src="{% static 'image/icon/dollar.png' %}" />
+          <p>USD</p>
+        </div>
+        <!-- 환율 api -->
+        <div class="money">
+          <p>{{ exchange_rate }}</p>
+        </div>
+        <hr />
+        <!-- 바로가기 -->
+        <a href="{% url 'savior:USA_exchange' %}">
+          <div class="more">
+            <p>search more</p>
+            <img src="{% static 'image/icon/more.svg' %}" /></div
+        ></a>
+      </div>
+      <!-- 날씨 -->
+      <div class="weather">
+        <!-- 나라의 수도 -->
+        <div class="location">
+          <img src="{% static 'image/icon/pin.png' %}" />
+          <p>Washington,D.C</p>
+        </div>
+        <!-- 날씨 api -->
+        <div class="weather-api">
+          <img src="https://openweathermap.org/img/wn/{{ icon_info }}@2x.png" />
+          <p>{{ temperature }}°C</p>
+        </div>
+      </div>
+    </div>
+    <!-- 언어 & 소켓 -->
+    <div class="inform-lang-socket">
+      <!-- 언어 -->
+      <div class="lang">
+        <div class="lang-title">
+          <img src="{% static 'image/icon/language.png' %}" />
+          <p>L1</p>
+        </div>
+        <div class="lang-1">
+          <p>English</p>
+        </div>
+        <div class="lang-2">
+          <p>영어</p>
+        </div>
+      </div>
+      <!-- 소켓 -->
+      <div class="socket">
+        <div class="socket-title">
+          <img src="{% static 'image/icon/lightning.png' %}" />
+          <p>Socket</p>
+        </div>
+        <div class="socket-content">
+          <img src="{% static 'image/plug/type-a.svg' %}" />
+          <div class="socket-text">
+            <p>120V AC</p>
+            <p>60 Hz</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 식당 추천 -->
+    <a href="{% url 'savior:recommend' %}">
+      <div class="inform-rest">
+        <div class="rest-title">
+          <img src="{% static 'image/icon/eat_black.png' %}" />
+          <p>식당 추천</p>
+          <div class="rest-hr">
+            <hr />
+          </div>
+        </div>
+        <div class="rest-comment">
+          <p>여러 사용자의 별점과 리뷰 수를 확인해보세요.</p>
+        </div>
+      </div>
+    </a>
+    <!-- 시세 제목 -->
+    <div class="inform-price-title">
+      <img src="{% static 'image/icon/tag.png' %}" />
+      <p>주요 물품의 시세</p>
+    </div>
+    <!-- 시세 -->
+    <div class="inform-price">
+      <a href="{% url 'savior:USA_clothes' %}">
+        <div class="clothes">
+          <img src="{% static 'image/icon/cloth.png' %}" />
+          <p>의류</p>
+        </div>
+      </a>
+      <a href="{% url 'savior:USA_foods' %}">
+        <div class="foods">
+          <img src="{% static 'image/icon/food.svg' %}" />
+          <p>음식</p>
+        </div>
+      </a>
+      <a href="{% url 'savior:USA_others' %}">
+        <div class="others">
+          <img src="{% static 'image/icon/gift-card.png' %}" />
+          <p>잡화</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %} {% block extra-script %}
+<script>
+  // 나라 스크랩 기능 (star)
+  let isStarFilled = false;
+
+  function toggleStarImage() {
+    const starImage = document.querySelector(".star img");
+
+    if (isStarFilled) {
+      starImage.src = "{% static 'image/icon/star-line.svg' %}";
+    } else {
+      starImage.src = "{% static 'image/icon/star-fill.svg' %}";
+    }
+
+    isStarFilled = !isStarFilled;
+  }
+</script>
+{% endblock %}

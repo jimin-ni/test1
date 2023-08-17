@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>바로가기 편하게 만든 임시용 메인 페이지</title>
+    <title>임시용 메인 페이지</title>
 </head>
 <body>
 
@@ -11,15 +11,19 @@
     {% block content %}
     <!--* 로그인 사용자 이름(id) 확인 -->
     {% if request.user.is_authenticated %}
-        <span>로그인 계정 이름 : {{ request.user.username }}</span><br><br><br>
+        <span>로그인 계정 username : {{ request.user.username }}</span><br><br><br>
+        <span>로그인 계정 email : {{ request.user.email }}</span><br><br><br>
+        <span>로그인 계정 nickname : {{ request.user.nickname }}</span><br><br><br>
+        <span>로그인 계정 name : {{ request.user.name }}</span><br><br><br>
     {% else %}
-        <span>먼저 로그인 해주세요 </span><br><br><br>
+        <span>먼저 로그인 하세요 </span><br><br><br>
     {% endif %}
 
     <!--* 로그인, 로그아웃, 회원가입 버튼 -->
     {% if request.user.is_authenticated %}
         <a href="{% url 'savior:accounts:logout' %}">로그아웃</a><br><br><br>
     {% else %}
+        <!-- <a href="{% url 'savior:accounts:login' %}">로그인</a> -->
         <a href="{% url 'savior:accounts:login' %}">로그인</a>
         <a href="{% url 'savior:accounts:signup' %}">회원가입</a><br><br><br>
     {% endif %}
@@ -29,6 +33,17 @@
 
     <a href="{% url 'savior:japan' %}">일본 페이지</a><br>
     <a href="{% url 'savior:USA' %}">미국 페이지</a><br>
-    <a href="{% url 'savior:vietnam' %}">베트남 페이지</a><br>
+    <a href="{% url 'savior:vietnam' %}">베트남 페이지</a><br><br>
+
+    <a href="{% url 'savior:community' %}">커뮤니티</a><br><br>
+
+    <a href="{% url 'savior:japan_pricelist' %}">nav바 시세 선택 페이지</a><br><br><br>
+
+
+    <!--* 식당 추천 페이지  -->
+    <a href="{% url 'savior:recommend' %}">미국 식당 추천 페이지</a><br>
+    <a href="{% url 'savior:recommend_japan' %}">일본 식당 추천 페이지</a><br>
+    <a href="{% url 'savior:recommend_vietnam' %}">베트남 식당 추천 페이지</a><br><br><br>
+
 </body>
 </html>

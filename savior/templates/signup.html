@@ -1,23 +1,120 @@
+{% load static %}
 <!--* 회원가입 페이지  -->
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
-</head>
-<body>
-    {% block content %}
-    <h1>회원가입 페이지</h1>
-    <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div>
-        {{ form.as_p }}
-        <div>
-            <input type="submit">
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Savoir : Signup</title>
+        <link rel="stylesheet" href="{% static 'css/signup.css' %}" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Judson&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        {% block content %}
+
+        <!-- <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                {{ form.as_p }}
+                <div>
+                    <input type="submit" />
+                </div>
+            </div>
+        </form> -->
+
+        <div class="container">
+            <div class="background"></div>
+            <header class="hd">
+                <div class="hd-back">
+                    <img
+                        src="{% static 'image/nav/back.svg' %}"
+                        style="height: 30px"
+                        onclick="goBack()"
+                    />
+                </div>
+                <div class="hd-logo">
+                    <img src="{% static 'image/savior.png' %}./" />
+                </div>
+                <div class="hd-profile">
+                    <a href="">
+                        <img src="{% static 'image/nav/user_color.png' %}"
+                    /></a>
+                </div>
+            </header>
+
+            <div class="inform">
+                <div class="title">
+                    <p>Sign up</p>
+                </div>
+            </div>
+
+            <section class="sec">
+                <form
+                    class="user"
+                    action=""
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+                    {% csrf_token %}
+
+                    <div class="id-input">
+                        <span class="txt">아이디</span
+                        ><span class="highlights">*</span>
+                        <div id="id-form">{{ form.username }}</div>
+                        
+                    </div>
+
+
+                    <div class="email-input">
+                        <span class="txt">이메일</span
+                        ><span class="highlights">*</span>
+                        <div id="email-form">{{ form.email }}</div>
+                    </div>
+
+                    
+                    <div class="pw-input">
+                        <span class="txt">비밀번호</span
+                        ><span class="highlights">*</span>
+                        <div id="pw-form">{{ form.password1 }}</div>
+                        
+                    </div>
+                    <div class="pw-confirm">
+                        <span class="txt">비밀번호 확인</span
+                        ><span class="highlights">*</span>
+                        <div id="pw-form">{{ form.password2 }}</div>
+                        
+                    </div>
+
+                    <input type="submit" id="signup_btn" value="회원가입"></input>
+                </form>
+            </section>
+
+            <navigation class="nav">
+                <a href="{% url 'savior:exchange' %}"
+                    ><img src="{% static 'image/nav/money.svg' %}"
+                /></a>
+                <a href="#"><img src="{% static 'image/nav/eat.png' %}" /></a>
+                <a href="#"
+                    ><img
+                        src="{% static 'image/nav/pin_color.png' %}"
+                        style="height: 45px"
+                /></a>
+                <a href="{% url 'savior:pricelist' %}"
+                    ><img src="{% static 'image/nav/tag_color.png' %}"
+                /></a>
+                <a href="{% url 'savior:community' %}"
+                    ><img src="{% static 'image/nav/edit-message.png' %}"
+                /></a>
+            </navigation>
         </div>
-    </div>
-</form>
-{% endblock %}
-</body>
+        <script src="{% static 'js/go-back.js' %}"></script>
+        <script src="{% static 'js/go-back-nonclick.js' %}"></script>
+
+        {% endblock %}
+    </body>
 </html>
