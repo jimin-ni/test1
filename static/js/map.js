@@ -36,21 +36,21 @@ window.initMap = function () {
       name: "일본, 도쿄",
       lat: 35.5042949,
       lng: 138.4503955,
-      pageUrl: "./japan.html",
+      pageUrl: "/japan.html",
     },
     {
       label: "",
       name: "베트남, 하노이",
       lat: 21.022802,
       lng: 105.7590216,
-      pageUrl: "./vietnam.html",
+      pageUrl: "/vietnam.html",
     },
     {
       label: "",
       name: "미국, 워싱턴DC",
       lat: 38.8939059,
       lng: -77.1793867,
-      pageUrl: "./USA.html",
+      pageUrl: "/USA.html",
     },
   ];
   malls.forEach(({ label, name, lat, lng, pageUrl }) => {
