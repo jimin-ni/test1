@@ -231,6 +231,10 @@ hr {
   text-decoration: none;
 }
 
+.items a img {
+  width: 100%;
+}
+
 .items a:link,
 .items a:visited {
   color: black;

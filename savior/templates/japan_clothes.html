@@ -65,73 +65,72 @@
 
         <div class="items">
           {% if clothes %}
-          <a href="{% url 'savior:japan_clothes_detail' clothes.0.pk %}">
             <div class="items-shirts">
+              <a href="{% url 'savior:japan_clothes_detail' clothes.0.pk %}">
               <img
                 src="{% static 'image/price/clothes/tshirt.png' %}"
                 alt="."
-              />
+              /></a>
               <div class="item-info">
-                {{ clothes.0.japan_clothes }}
+                <a href="{% url 'savior:japan_clothes_detail' clothes.0.pk %}">{{ clothes.0.japan_clothes }}</a>
                 <div class="heart" onclick="toggleHeartImage()">
                   <img src="{% static 'image/icon/heart-outline.svg' %}" />
                 </div>
               </div>
             </div>
-          </a>
 
           <hr />
 
-          <a href="{% url 'savior:japan_clothes_detail' clothes.1.pk %}">
+          
             <div class="items-pants">
-              <img src="{% static 'image/price/clothes/pants.png' %}" alt="." />
+              <a href="{% url 'savior:japan_clothes_detail' clothes.1.pk %}">
+              <img src="{% static 'image/price/clothes/pants.png' %}" alt="." /></a>
               <div class="item-info">
-                {{ clothes.1.japan_clothes }}
+                <a href="{% url 'savior:japan_clothes_detail' clothes.1.pk %}">{{ clothes.1.japan_clothes }}</a>
                 <div class="heart" onclick="toggleHeartImage()">
                   <img src="{% static 'image/icon/heart-outline.svg' %}" />
                 </div>
               </div>
             </div>
-          </a>
 
           <hr />
 
-          <a href="{% url 'savior:japan_clothes_detail' clothes.2.pk %}">
+          
             <div class="items-cap">
-              <img src="{% static 'image/price/clothes/cap.png' %}" alt="." />
+              <a href="{% url 'savior:japan_clothes_detail' clothes.2.pk %}">
+              <img src="{% static 'image/price/clothes/cap.png' %}" alt="." /></a>
               <div class="item-info">
-                {{ clothes.2.japan_clothes }}
+                <a href="{% url 'savior:japan_clothes_detail' clothes.2.pk %}">{{ clothes.2.japan_clothes }}</a>
                 <div class="heart" onclick="toggleHeartImage()">
                   <img src="{% static 'image/icon/heart-outline.svg' %}" />
                 </div>
               </div>
             </div>
-          </a>
 
           <hr />
 
-          <a href="{% url 'savior:japan_clothes_detail' clothes.3.pk %}">
+          
             <div class="items-onepiece">
+              <a href="{% url 'savior:japan_clothes_detail' clothes.3.pk %}">
               <img
                 src="{% static 'image/price/clothes/onepiece.png' %}"
                 alt="."
-              />
+              /></a>
               <div class="item-info">
-                <span>{{ clothes.3.japan_clothes }}</span>
+                <a href="{% url 'savior:japan_clothes_detail' clothes.3.pk %}">{{ clothes.3.japan_clothes }}</a>
                 <div class="heart" onclick="toggleHeartImage()">
                   <img src="{% static 'image/icon/heart-outline.svg' %}" />
                 </div>
               </div>
             </div>
-          </a>
 
           <hr />
 
-          <a href="{% url 'savior:japan_clothes_detail' clothes.4.pk %}">
             <div class="items-shoes">
-              <img src="{% static 'image/price/clothes/shoes.png' %}" alt="." />
+              <a href="{% url 'savior:japan_clothes_detail' clothes.4.pk %}">
+              <img src="{% static 'image/price/clothes/shoes.png' %}" alt="." /></a>
               <div class="item-info">
-                <span>{{ clothes.4.japan_clothes }}</span>
+                <a href="{% url 'savior:japan_clothes_detail' clothes.4.pk %}">{{ clothes.4.japan_clothes }}</a>
                 <div class="heart" onclick="toggleHeartImage()">
                   <img src="{% static 'image/icon/heart-outline.svg' %}" />
                 </div>

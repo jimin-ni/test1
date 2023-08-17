@@ -66,52 +66,55 @@
 
         <div class="items">
           {% if others %}
-          <a href="{% url 'savior:USA_others_detail' others.0.pk %}">
-            <div class="items-shirts">
+
+          <div class="items-shirts">
+            <a href="{% url 'savior:USA_others_detail' others.0.pk %}">
               <img
                 src="{% static 'image/price/others/usa/snacks.png' %}"
                 alt="."
-              />
-              <div class="item-info">
-                {{ others.0.usa_others }}
-                <div class="heart" onclick="toggleHeartImage(this)">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
-                </div>
+            /></a>
+            <div class="item-info">
+              <a href="{% url 'savior:USA_others_detail' others.0.pk %}"
+                >{{ others.0.usa_others }}</a
+              >
+              <div class="heart" onclick="toggleHeartImage(this)">
+                <img src="{% static 'image/icon/heart-outline.svg' %}" />
               </div>
             </div>
-          </a>
+          </div>
 
           <hr />
-          <a href="{% url 'savior:USA_others_detail' others.1.pk %}">
-            <div class="items-pants">
-              <img
-                src="{% static 'image/price/others/usa/toys.png' %}"
-                alt="."
-              />
-              <div class="item-info">
-                {{ others.1.usa_others }}
-                <div class="heart" onclick="toggleHeartImage(this)">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
-                </div>
+
+          <div class="items-pants">
+            <a href="{% url 'savior:USA_others_detail' others.1.pk %}">
+              <img src="{% static 'image/price/others/usa/toys.png' %}" alt="."
+            /></a>
+            <div class="item-info">
+              <a href="{% url 'savior:USA_others_detail' others.1.pk %}">
+                {{ others.1.usa_others }}</a
+              >
+              <div class="heart" onclick="toggleHeartImage(this)">
+                <img src="{% static 'image/icon/heart-outline.svg' %}" />
               </div>
             </div>
-          </a>
+          </div>
 
           <hr />
-          <a href="{% url 'savior:USA_others_detail' others.2.pk %}">
-            <div class="items-cap">
-              <img
-                src="{% static 'image/price/others/usa/cup.png' %}"
-                alt="."
-              />
-              <div class="item-info">
-                {{ others.2.usa_others }}
-                <div class="heart" onclick="toggleHeartImage(this)">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
-                </div>
+
+          <div class="items-cap">
+            <a href="{% url 'savior:USA_others_detail' others.2.pk %}">
+              <img src="{% static 'image/price/others/usa/cup.png' %}" alt="."
+            /></a>
+            <div class="item-info">
+              <a href="{% url 'savior:USA_others_detail' others.2.pk %}"
+                >{{ others.2.usa_others }}</a
+              >
+              <div class="heart" onclick="toggleHeartImage(this)">
+                <img src="{% static 'image/icon/heart-outline.svg' %}" />
               </div>
             </div>
-          </a>
+          </div>
+
           <hr />
           {% endif %}
         </div>

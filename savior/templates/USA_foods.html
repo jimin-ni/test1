@@ -66,52 +66,48 @@
 
         <div class="items">
           {% if foods %}
-          <a href="{% url 'savior:recommend' %}">
-            <div class="items-shirts">
+
+          <div class="items-shirts">
+            <a href="{% url 'savior:recommend' %}">
               <img
                 src="{% static 'image/price/foods/usa/brunch.png' %}"
                 alt="."
-              />
-              <div class="item-info">
-                {{ foods.0.usa_foods }}
-                <div class="heart" onclick="toggleHeartImage()">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
-                </div>
+            /></a>
+            <div class="item-info">
+              <a href="{% url 'savior:recommend' %}">{{ foods.0.usa_foods }}</a>
+              <div class="heart" onclick="toggleHeartImage()">
+                <img src="{% static 'image/icon/heart-outline.svg' %}" />
               </div>
             </div>
-          </a>
+          </div>
 
           <hr />
-          <a href="{% url 'savior:recommend' %}">
-            <div class="items-pants">
-              <img
-                src="{% static 'image/price/foods/usa/pizza.png' %}"
-                alt="."
-              />
-              <div class="item-info">
-                {{ foods.1.usa_foods }}
-                <div class="heart" onclick="toggleHeartImage()">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
-                </div>
+
+          <div class="items-pants">
+            <a href="{% url 'savior:recommend' %}">
+              <img src="{% static 'image/price/foods/usa/pizza.png' %}" alt="."
+            /></a>
+            <div class="item-info">
+              <a href="{% url 'savior:recommend' %}">{{ foods.1.usa_foods }}</a>
+              <div class="heart" onclick="toggleHeartImage()">
+                <img src="{% static 'image/icon/heart-outline.svg' %}" />
               </div>
             </div>
-          </a>
+          </div>
 
           <hr />
-          <a href="{% url 'savior:recommend' %}">
-            <div class="items-cap">
-              <img
-                src="{% static 'image/price/foods/usa/steak.png' %}"
-                alt="."
-              />
-              <div class="item-info">
-                {{ foods.2.usa_foods }}
-                <div class="heart" onclick="toggleHeartImage()">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
-                </div>
+
+          <div class="items-cap">
+            <a href="{% url 'savior:recommend' %}">
+              <img src="{% static 'image/price/foods/usa/steak.png' %}" alt="."
+            /></a>
+            <div class="item-info">
+              <a href="{% url 'savior:recommend' %}">{{ foods.2.usa_foods }}</a>
+              <div class="heart" onclick="toggleHeartImage()">
+                <img src="{% static 'image/icon/heart-outline.svg' %}" />
               </div>
             </div>
-          </a>
+          </div>
           <hr />
           {% endif %}
         </div>

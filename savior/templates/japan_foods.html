@@ -66,52 +66,58 @@
 
         <div class="items">
           {% if foods %}
-          <a href="{% url 'savior:recommend_japan'  %}">
-            <div class="items-shirts">
+
+          <div class="items-shirts">
+            <a href="{% url 'savior:recommend_japan'  %}">
               <img
                 src="{% static 'image/price/foods/japan/udon.png' %}"
                 alt="."
-              />
-              <div class="item-info">
-                {{ foods.0.japan_foods }}
-                <div class="heart" onclick="toggleHeartImage()">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
-                </div>
+            /></a>
+            <div class="item-info">
+              <a href="{% url 'savior:recommend_japan'  %}"
+                >{{ foods.0.japan_foods }}</a
+              >
+              <div class="heart" onclick="toggleHeartImage()">
+                <img src="{% static 'image/icon/heart-outline.svg' %}" />
               </div>
             </div>
-          </a>
+          </div>
 
           <hr />
-          <a href="{% url 'savior:recommend_japan' %}">
-            <div class="items-pants">
+
+          <div class="items-pants">
+            <a href="{% url 'savior:recommend_japan' %}">
               <img
                 src="{% static 'image/price/foods/japan/sushi.png' %}"
                 alt="."
-              />
-              <div class="item-info">
-                {{ foods.1.japan_foods }}
-                <div class="heart" onclick="toggleHeartImage()">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
-                </div>
+            /></a>
+            <div class="item-info">
+              <a href="{% url 'savior:recommend_japan' %}"
+                >{{ foods.1.japan_foods }}</a
+              >
+              <div class="heart" onclick="toggleHeartImage()">
+                <img src="{% static 'image/icon/heart-outline.svg' %}" />
               </div>
             </div>
-          </a>
+          </div>
 
           <hr />
-          <a href="{% url 'savior:recommend_japan' %}">
-            <div class="items-cap">
+
+          <div class="items-cap">
+            <a href="{% url 'savior:recommend_japan' %}">
               <img
                 src="{% static 'image/price/foods/japan/okonomiyakki.png' %}"
                 alt="."
-              />
-              <div class="item-info">
-                {{ foods.2.japan_foods }}
-                <div class="heart" onclick="toggleHeartImage()">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
-                </div>
+            /></a>
+            <div class="item-info">
+              <a href="{% url 'savior:recommend_japan' %}"
+                >{{ foods.2.japan_foods }}</a
+              >
+              <div class="heart" onclick="toggleHeartImage()">
+                <img src="{% static 'image/icon/heart-outline.svg' %}" />
               </div>
             </div>
-          </a>
+          </div>
           <hr />
           {% endif %}
         </div>

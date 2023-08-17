@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Savoir : {% block title %}vietnam_foods{% endblock %}</title>
     {% load static %} {% block extra-style %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/heart.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/japan.css' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -66,46 +68,46 @@
 
         <div class="items">
           {% if foods %}
-          <a href="{% url 'savior:recommend_vietnam'  %}">
+          
             <div class="items-shirts">
-              <img
+                <a href="{% url 'savior:recommend_vietnam'  %}">
+                <img
                 src="{% static 'image/price/foods/vietnam/chazio.png' %}"
                 alt="."
-              />
+              /></a>
               <div class="item-info">
-                {{ foods.0.vietnam_foods }}
-                <div class="heart" onclick="toggleHeartImage()">
-                  <img src="{% static 'image/icon/heart-outline.svg' %}" />
+                <a href="{% url 'savior:recommend_vietnam'  %}">{{ foods.0.vietnam_foods }}</a>
+                <div class="item">
+                  <img class="heart-image" src="{% static 'image/icon/heart-outline.svg' %}">
                 </div>
               </div>
             </div>
-          </a>
 
           <hr />
-          <a href="{% url 'savior:recommend_vietnam' %}">
             <div class="items-pants">
+                <a href="{% url 'savior:recommend_vietnam' %}">
               <img
                 src="{% static 'image/price/foods/vietnam/ricenoodle.png' %}"
                 alt="."
-              />
+              /></a>
               <div class="item-info">
-                {{ foods.1.vietnam_foods }}
+                <a href="{% url 'savior:recommend_vietnam' %}">{{ foods.1.vietnam_foods }}</a>
                 <div class="heart" onclick="toggleHeartImage()">
                   <img src="{% static 'image/icon/heart-outline.svg' %}" />
                 </div>
               </div>
             </div>
-          </a>
 
           <hr />
-          <a href="{% url 'savior:recommend_vietnam' %}">
+          
             <div class="items-cap">
+                <a href="{% url 'savior:recommend_vietnam' %}">
               <img
                 src="{% static 'image/price/foods/vietnam/coffee.png' %}"
                 alt="."
-              />
+              /></a>
               <div class="item-info">
-                {{ foods.2.vietnam_foods }}
+                <a href="{% url 'savior:recommend_vietnam' %}">{{ foods.2.vietnam_foods }}</a>
                 <div class="heart" onclick="toggleHeartImage()">
                   <img src="{% static 'image/icon/heart-outline.svg' %}" />
                 </div>
@@ -143,7 +145,7 @@
 
     <script src="{% static 'js/go-back.js' %}"></script>
     <script src="{% static 'js/go-back-nonclick.js' %}"></script>
-    <script src="{% static 'js/scrap.js' %}"></script>
+    
     <!--
     <a href="{% url 'savior:vietnam' %}">뒤로가기</a><br>
     <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
