@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Savoir : 환율 계산</title>
+        <title>Savoir : Login</title>
         <link rel="stylesheet" href="{% static 'css/exchange.css' %}" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,7 +38,7 @@
 
             <div class="inform">
                 <div class="title">
-                  <p>Exchange Rate</p>
+                    <p>Exchange Rate</p>
                 </div>
             </div>
 
@@ -49,9 +49,9 @@
                         {% csrf_token %}
                         <!-- changeCountry -->
                         <select name="country" id="input-dropdown">
-                            <option  disabled value="">나라 선택</option>
+                            <option  selected disabled value="">국가 선택</option>
                             <option  value="japan">Japan</option>
-                            <option selected value="USA">America</option>
+                            <option value="USA">America</option>
                             <option value="vietnam">Vietnam</option>
                             
                         </select>
@@ -60,7 +60,7 @@
                                                                 
                 </div>
 
-                <form action="{% url 'savior:USA_exchange' %}" method="post">
+                <form action="{% url 'savior:vietnam_exchange' %}" method="post">
                     {% csrf_token %}
                     <div class="content">
 
@@ -68,18 +68,8 @@
                         
                         <div id="visit-country"> 
                             <div id="input">
-                                <p id="krw">USD</p>
                                 <div id="result-main">
-                                    
-                                    <h2>{{USD}}<img src="{% static 'image/icon/dollar.png' %}" alt="dollar" id="unit-icon"></h2>
-
-    <input
-    type="number"
-    placeholder="달러"
-    name="USD"
-    class="exchange-input"
-/>
-
+                                    <input type="number" class="exchange-input"/>
                                 </div>
                                 
                             </div>
@@ -142,6 +132,7 @@
             </navigation>
         </div>
         <script src="{% static 'js/exchange.js' %}"></script>
+        <script src="{% static 'js/modal_country.js' %}"></script>
         <script src="{% static 'js/go-back.js' %}"></script>
         <script src="{% static 'js/go-back-nonclick.js' %}"></script>
 

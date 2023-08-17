@@ -1,40 +1,150 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a href="{% url 'savior:japan' %}">뒤로가기</a><br>
-    <a href="{% url 'savior:mypage' %}">마이페이지</a><br><br>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Savoir : 환율 계산</title>
+        <link rel="stylesheet" href="{% static 'css/exchange.css' %}" />
 
-    <form action="{% url 'savior:exchange' %}" method="POST">
-        {% csrf_token %}
-        <select name="country"> 
-            <option value="">--국가 선택--</option> 
-            <option value="japan">일본</option> 
-            <option value="USA">미국</option> 
-            <option value="vietnam">베트남</option> 
-        </select>
-        <input type="submit" value="선택">
-    </form>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Judson&display=swap"
+            rel="stylesheet"
+        />
+        {% block content %}
+    </head>
+    <body>
+        <div class="container">
+            <div class="background"></div>
+            <header class="hd">
+                <div class="hd-back">
+                    <img
+                        src="{% static 'image/nav/back.svg' %}"
+                        style="height: 30px"
+                        onclick="goBack()"
+                    />
+                </div>
+                <div class="hd-logo">
+                    <img src="{% static 'image/savior.png' %}./" />
+                </div>
+                <div class="hd-profile">
+                    <a href="">
+                        <img src="{% static 'image/nav/user_color.png' %}"
+                    /></a>
+                </div>
+            </header>
 
-    <br>
-    일본 환율계산기
-    <br>
+            <div class="inform">
+                <div class="title">
+                    <p>Exchange Rate</p>
+                </div>
+            </div>
 
-    <form action="{% url 'savior:japan_exchange' %}" method="post" >
-        {% csrf_token %}
-        <p>
-            JPY <br>
-            <input type="number" placeholder="가격을 입력하세요" name='JPY' min="0">엔
-        </p>
-        <p>
-            KRW <br>
-            {{JPY}}엔 = <input type="number" name='KRW' value="{{ KRW|default:'' }}">원
-        </p>
-        <button type="submit" name="submit">환율 추적</button>
-    </form>
-</body>
+            <section class="sec">
+
+                <div class="choose">
+                    <form action="{% url 'savior:exchange' %}" method="POST">
+                        {% csrf_token %}
+                        <!-- changeCountry -->
+                        <select name="country" id="input-dropdown">
+                            <option  disabled value="">나라 선택</option>
+                            <option selected value="japan">Japan</option>
+                            <option value="USA">America</option>
+                            <option value="vietnam">Vietnam</option>
+                            
+                        </select>
+                        <input type="submit" value="선택" />
+                    </form>
+                                                                
+                </div>
+
+                <form action="{% url 'savior:japan_exchange' %}" method="post">
+                    {% csrf_token %}
+                    <div class="content">
+
+
+                        
+                        <div id="visit-country"> 
+                            <div id="input">
+                                <p id="krw">JPY</p>
+                                <div id="result-main">
+                                    
+                                    <h2>{{JPY}}<img src="{% static 'image/icon/yen.png' %}" alt="yen" id="unit-icon"></h2>
+
+    <input
+    type="number"
+    placeholder="엔"
+    name="JPY"
+    class="exchange-input"
+/>
+
+                                </div>
+                                
+                            </div>
+                            <div class="dots">
+                                <img src="{% static 'image/icon/dots.png' %}" alt="dots" />
+                            </div>
+                        </div>
+
+
+                        <div id="exchange">
+                            <img src="{% static 'image/icon/exchange_to.png' %}" alt="exchange_to" />
+                        </div> 
+                        <div id="korea">
+                            <div class="dots">
+                                <img src="{% static 'image/icon/dots.png' %}" alt="dots" />
+                            </div>
+                            <div id="result">
+                                <p id="krw">KRW</p>
+                                <div id="result-main">
+                                    <p id="krw-sign">{{KRW}}&#x20a9</p>
+                                    
+                                        <input
+                    type="number"
+                    name="KRW"
+                    placeholder="원"
+                    class="exchange-result"
+                    value="{{ KRW|default:'' }}"
+                />
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    <div>
+                        <button type="submit" class="calc_btn">환율 계산</button>
+                    </div>
+                </div>
+                </form>
+
+
+            </section>
+
+            <navigation class="nav">
+                <a href="{% url 'savior:exchange' %}"
+                    ><img src="{% static 'image/nav/money.svg' %}"
+                /></a>
+                <a href="#"><img src="{% static 'image/nav/eat.png' %}" /></a>
+                <a href="#"
+                    ><img
+                        src="{% static 'image/nav/pin_color.png' %}"
+                        style="height: 45px"
+                /></a>
+                <a href="{% url 'savior:pricelist' %}"
+                    ><img src="{% static 'image/nav/tag_color.png' %}"
+                /></a>
+                <a href="{% url 'savior:community' %}"
+                    ><img src="{% static 'image/nav/edit-message.png' %}"
+                /></a>
+            </navigation>
+        </div>
+        <script src="{% static 'js/exchange.js' %}"></script>
+        <script src="{% static 'js/go-back.js' %}"></script>
+        <script src="{% static 'js/go-back-nonclick.js' %}"></script>
+
+        {% endblock %} 
+    </body>
 </html>
