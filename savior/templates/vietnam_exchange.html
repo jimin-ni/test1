@@ -38,7 +38,7 @@
 
             <div class="inform">
                 <div class="title">
-                  <p>Exchange Rate</p>
+                    <p>Exchange Rate</p>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
                         <select name="country" id="input-dropdown">
                             <option  disabled value="">나라 선택</option>
                             <option  value="japan">Japan</option>
-                            <option value="USA">America</option>
+                            <option value="USA">USA</option>
                             <option  selected value="vietnam">Vietnam</option>
                             
                         </select>
@@ -63,9 +63,6 @@
                 <form action="{% url 'savior:vietnam_exchange' %}" method="post">
                     {% csrf_token %}
                     <div class="content">
-
-
-                        
                         <div id="visit-country"> 
                             <div id="input">
                                 <p id="krw">VND</p>
@@ -77,7 +74,7 @@
     type="number"
     placeholder="동"
     name="VND"
-    class="exchange-input"
+    class="exchange-input" min="0"
 />
 
                                 </div>
