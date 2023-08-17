@@ -30,27 +30,29 @@ window.initMap = function () {
     map.fitBounds(bounds);
   });
 
+  const japanPageUrl = "{% url 'Savior : 일본' %}";
+
   const malls = [
     {
       label: "",
       name: "일본, 도쿄",
       lat: 35.5042949,
       lng: 138.4503955,
-      pageUrl: "/japan.html",
+      pageUrl: japanPageUrl,
     },
     {
       label: "",
       name: "베트남, 하노이",
       lat: 21.022802,
       lng: 105.7590216,
-      pageUrl: "/vietnam.html",
+      pageUrl: "../../templates/vietnam.html",
     },
     {
       label: "",
       name: "미국, 워싱턴DC",
       lat: 38.8939059,
       lng: -77.1793867,
-      pageUrl: "/USA.html",
+      pageUrl: "../../templates/USA.html",
     },
   ];
   malls.forEach(({ label, name, lat, lng, pageUrl }) => {
@@ -61,8 +63,13 @@ window.initMap = function () {
     });
 
     marker.addListener("click", () => {
-      // 해당 마커가 클릭되었을 때 해당 페이지로 넘어가는 코드 추가
       window.location.href = pageUrl;
+      map.panTo(marker.position);
+      infowindow.setContent(name);
+      infowindow.open({
+        anchor: marker,
+        map,
+      });
     });
   });
 };
