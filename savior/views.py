@@ -18,7 +18,7 @@ import csv
 
 from crawling_Vietnam import main_function_vietnam  # crawling.py 파일의 main_search 함수 임포트
 from crawling_Japan import main_function_japan
-
+import math
 
 #임시용 메인페이지
 def main(request):
@@ -89,7 +89,8 @@ def japan_clothes_detail(request, id):
     number_list = [comment.number for comment in comments]
     
     # 계산
-    average_number = sum(number_list) / len(number_list) if number_list else 0
+    # average_number = sum(number_list) / len(number_list) if number_list else 0
+    average_number = math.ceil(sum(number_list) / len(number_list)) if number_list else 0 #* 소수점 아래 반올림
     max_number = max(number_list) if number_list else 0
     min_number = min(number_list) if number_list else 0
     
@@ -160,7 +161,8 @@ def japan_others_detail(request, id):
     number_list = [comment.number for comment in comments]
     
     # 계산
-    average_number = sum(number_list) / len(number_list) if number_list else 0
+    # average_number = sum(number_list) / len(number_list) if number_list else 0
+    average_number = math.ceil(sum(number_list) / len(number_list)) if number_list else 0 #* 소수점 아래 반올림
     max_number = max(number_list) if number_list else 0
     min_number = min(number_list) if number_list else 0
     
@@ -274,7 +276,8 @@ def usa_clothes_detail(request, id):
     number_list = [comment.number for comment in comments]
     
     # 계산
-    average_number = sum(number_list) / len(number_list) if number_list else 0
+    # average_number = sum(number_list) / len(number_list) if number_list else 0
+    average_number = math.ceil(sum(number_list) / len(number_list)) if number_list else 0 #* 소수점 아래 반올림
     max_number = max(number_list) if number_list else 0
     min_number = min(number_list) if number_list else 0
     
@@ -334,7 +337,8 @@ def usa_others_detail(request, id):
     number_list = [comment.number for comment in comments]
     
     # 계산
-    average_number = sum(number_list) / len(number_list) if number_list else 0
+    # average_number = sum(number_list) / len(number_list) if number_list else 0
+    average_number = math.ceil(sum(number_list) / len(number_list)) if number_list else 0 #* 소수점 아래 반올림
     max_number = max(number_list) if number_list else 0
     min_number = min(number_list) if number_list else 0
     
@@ -434,7 +438,8 @@ def vietnam_clothes_detail(request, id):
     number_list = [comment.number for comment in comments]
     
     # 계산
-    average_number = sum(number_list) / len(number_list) if number_list else 0
+    # average_number = sum(number_list) / len(number_list) if number_list else 0
+    average_number = math.ceil(sum(number_list) / len(number_list)) if number_list else 0 #* 소수점 아래 반올림
     max_number = max(number_list) if number_list else 0
     min_number = min(number_list) if number_list else 0
     
@@ -493,7 +498,8 @@ def vietnam_others_detail(request, id):
     number_list = [comment.number for comment in comments]
     
     # 계산
-    average_number = sum(number_list) / len(number_list) if number_list else 0
+    # average_number = sum(number_list) / len(number_list) if number_list else 0
+    average_number = math.ceil(sum(number_list) / len(number_list)) if number_list else 0 #* 소수점 아래 반올림
     max_number = max(number_list) if number_list else 0
     min_number = min(number_list) if number_list else 0
     

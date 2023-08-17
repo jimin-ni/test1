@@ -79,23 +79,22 @@ def kakao_login_callback(request):
         # nickname = profile.get("nickname", None) #! profile 변수가 none 이라고 인식해 get() 메서드 호출 불가 오류
         # nickname = kakao_account.get("nickname", None) #! 위에 오류 해결해보려고 ok
         nickname = kakao_account.get("nickname", "Jimin") #! 위에 오류 해결해보려고 ok
-        # nickname = kakao_account.get("profile_nickname", random_nickname) #! ID 값을 카카오개발자 문서에 작성된 것으로 수정. 하지만 None을 불러옴.
         # nickname = kakao_account.get("profile_nickname", random_nickname) #! 랜덤 닉네임 호출 
         # name = kakao_account.get("name", random_nickname) #! 랜덤 닉네임 호출 하는 네임 
-        # name = kakao_account.get("name", None) #! 랜덤 닉네임 호출 하는 네임 ok
-        name = kakao_account.get("name", "Jimin") #! 랜덤 닉네임 호출 하는 네임 ok
+        name = kakao_account.get("name", None) #! 랜덤 닉네임 호출 하는 네임 ok 
+        # name = kakao_account.get("name", "Jimin") #! 랜덤 닉네임 호출 하는 네임 ok
         # avatar_url = profile.get("profile_image_url", None)
         
         # email = kakao_account.get("email", None)
         # email = kakao_account.get("account_email", None)    #! EMAIL 값을 카카오개발자 문서에 작성된 것으로 수정, 여전히 못 읽어옴
         # email = kakao_account.get("account_email", "Null")    #! Email 못 읽으면 Null 로 입력하도록 설정 
-        email = kakao_account.get("email", "Null")    #! Email 못 읽으면 Null 로 입력하도록 설정 
+        email = kakao_account.get("email", "Null")    #! Email 못 읽으면 Null 로 입력하도록 설정 -> 이메일 읽을 수 있음
         # email = kakao_account.get("email", random_nickname)    #! Email 못 읽으면 랜덤 닉네임 호출 
         # email = kakao_account.get("account_email", random_nickname)    #! uniqe 오류 나옴..
         # gender = kakao_account.get("gender", None)
 
 #kakao로 로그인을 하려는 user의 이메일 계정이 이미 회원가입이 되었는지를 확인
-        # # user = models.User.objects.get_or_none(email=email) 
+        # user = models.User.objects.get_or_none(email=email) 
         user = User.objects.get_or_none(email=email) #* 커스텀된 User 모델 이용
         if user is not None:
             # if user.login_method != models.User.LOGIN_KAKAO:
@@ -103,10 +102,11 @@ def kakao_login_callback(request):
                 raise GithubException(f"Please login with {user.login_method}")
         else:
             # user = models.User.objects.create_user(
-            user = User.objects.create_user(
-            # user = User.create_user(
-                email=email,
+            user = User.objects.create_user( #* ok
+            # user = User.create_user(  #* ok 둘 중에 하나 하면 ok
+                email=email,    #! 이메일 읽기 가능
                 username=nickname,
+                nickname=name,
                 # name=name,
                 # username=slugify(nickname),  # 카카오 닉네임을 slugify하여 username으로 사용
                 first_name=slugify(nickname),   #  NOT NULL constraint failed 오류 발생으로 sluglify 함수이용

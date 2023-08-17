@@ -44,7 +44,11 @@
             <!-- changeCountry -->
             {% csrf_token %}
             <select name="country" id="input-dropdown">
-              <option disabled value="{% static 'image/icon/selected.png' %}">
+              <option
+                selected
+                disabled
+                value="{% static 'image/icon/selected.png' %}"
+              >
                 나라 선택
               </option>
               <option value="{% static 'image/icon/yen.png' %}" value2="Japan">
@@ -57,7 +61,6 @@
                 America
               </option>
               <option
-                selected
                 value="{% static 'image/icon/dong.png' %}"
                 value2="Vietnam"
               >
@@ -69,21 +72,36 @@
         </form>
 
         <div class="pricebtn">
-          <button type="button" onclick="" class="buttons">
-            <img src="{% static 'image/icon/cloth.png' %}" /><span
-              ><a href="{% url 'savior:vietnam_clothes' %}">의류</a></span
-            >
+          <button type="button" onclick="" class="buttons" id="btn_1">
+            <img src="{% static 'image/icon/cloth.png' %}" /><span>의류</span>
           </button>
-          <button type="button" onclick="" class="buttons">
-            <img src="{% static 'image/icon/food.svg' %}" /><span
-              ><a href="{% url 'savior:vietnam_foods' %}">음식</a></span
-            >
+          <button type="button" onclick="" class="buttons" id="btn_2">
+            <img src="{% static 'image/icon/food.svg' %}" /><span>음식</span>
           </button>
-          <button type="button" onclick="" class="buttons">
+          <button type="button" onclick="" class="buttons" id="btn_3">
             <img src="{% static 'image/icon/gift-card.png' %}" /><span
-              ><a href="{% url 'savior:vietnam_others' %}">잡화</a></span
+              >잡화</span
             >
           </button>
+        </div>
+
+        <div class="modal_background"></div>
+
+        <div class="modal_wrap">
+          <div class="modal_close">
+            <img src="{% static 'image/icon/close.png' %}" />
+          </div>
+          <div class="modal_text">
+            <div class="modal_logo">
+              <img src="{% static 'image/savior.png' %}" />
+            </div>
+
+            <div class="modal_content">
+              <div class="modal_mention">
+                <p>국가를 선택해주세요</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -99,6 +117,7 @@
         <a href="#"><img src="{% static 'image/nav/edit-message.png' %}" /></a>
       </navigation>
     </div>
+    <script src="{% static 'js/modal_country.js' %}"></script>
     <script src="{% static 'js/go-back.js' %}"></script>
     <script src="{% static 'js/go-back-nonclick.js' %}"></script>
   </body>
