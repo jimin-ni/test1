@@ -189,6 +189,7 @@ p {
   font-size: 16px;
 }
 .list_user {
+  width: 300px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -232,4 +233,22 @@ p {
   #btn {
     width: calc(430px * 0.5);
   }
+}
+
+/*a태그 색상화이트*/
+a:link {
+  color: white;
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+  text-decoration: underline;
+}
+a:active {
+  color: white;
+  text-decoration: none;
 }
