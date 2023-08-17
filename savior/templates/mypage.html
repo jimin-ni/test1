@@ -19,36 +19,189 @@
     </head>
     <body>
         {% block content %}
-        <a href="{% url 'savior:main' %}">뒤로가기</a><br />
-        <a href="{% url 'savior:mypage' %}">마이페이지</a><br /><br />
+        <!-- <a href="{% url 'savior:main' %}">뒤로가기</a><br />
+        <a href="{% url 'savior:mypage' %}">마이페이지</a><br /><br /> -->
 
-        <!--! 로그인, 회원가입, 로그아웃 -->
-        <!--* 로그인 사용자 이름(id) 확인 -->
-        {% if request.user.is_authenticated %}
-        <span>{{ request.user.username }}님, 반갑습니다</span><br /><br /><br />
+        <div class="container">
+            <div class="background"></div>
+            <header class="hd">
+                <div class="hd-back">
+                    <img
+                        src="{% static 'image/nav/back.svg' %}"
+                        style="height: 30px"
+                        onclick="goBack()"
+                    />
+                </div>
+                <div class="hd-logo">
+                    <img src="{% static 'image/savior.png' %}./" />
+                </div>
+                <div class="hd-profile">
+                    <a href="">
+                        <img src="{% static 'image/nav/user_color.png' %}"
+                    /></a>
+                </div>
+            </header>
 
-        <!-- 스크랩한 국가 목록 -->
-        Countries<br /><br />
+            <div class="inform">
+                <div class="title">
+                    <p>MyPage</p>
+                </div>
+            </div>
 
-        <hr />
+            <section class="sec">
+                <div id="mention">
+                    <!--! 로그인, 회원가입, 로그아웃 -->
+                    <!--* 로그인 사용자 이름(id) 확인 -->
+                    {% if request.user.is_authenticated %}
+                    <h3>{{ request.user.username }}님, 반갑습니다</h3>
+                </div>
 
-        <!-- 내가 쓴 글 목록 -->
-        Posts<br/><br/>
-        {% for post in request.user.post_set.all %}
-            {{ post.created|date:"Y년 m월 d일 H:i" }}<br/>
-            <a href="{% url 'savior:community_detail' post.id %}">{{ post.title }}</a><br/><br/>
-        {% endfor %}
-        <hr/>
+                <!-- 스크랩한 국가 목록 -->
+                <div id="contries-area" class="area-box">
+                    <h4 class="titles">
+                        Countries<img
+                            src="{% static 'image/icon/bookmark.png' %}"
+                            class="title-icon"
+                        />
+                    </h4>
+                    <hr />
 
-        <!-- 내가 쓴 댓글 목록 -->
-        Comments<br /><br />
-        {% for comment in request.user.comment_set.all %} {{comment.created|date:"Y년 m월 d일 H:i" }}<br/>
-        <a href="{% url 'savior:community_detail' comment.post.id %}">{{ comment.content }}</a><br/><br/>
-        {% endfor %} {% else %}
-        <span>먼저 로그인 해주세요 </span><br/>
+                    <div class="swiper-container">
+                        <!-- If we need navigation buttons -->
+                        <div
+                            class="swiper-button-prev"
+                            style="
+                                position: relative;
+                                top: 100px;
 
-        <!--* 로그아웃 버튼 -->
-        <a href="{% url 'savior:accounts:login' %}">로그인</a><br /><br /><br />
-        {% endif %} {% endblock %}
+                                color: #000;
+                            "
+                        ></div>
+                        <div
+                            class="swiper-button-next"
+                            style="
+                                position: relative;
+                                top: 80px;
+                                left: 280px;
+
+                                color: #000;
+                            "
+                        ></div>
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img
+                                    src="{% static 'image/flag/USA.png' %}"
+                                    alt="usa"
+                                /><br />미국
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    src="{% static 'image/flag/Japan.png' %}"
+                                    alt="japan"
+                                /><br />일본
+                            </div>
+                            <div class="swiper-slide">
+                                <img
+                                    src="{% static 'image/flag/Vietnam.png' %}"
+                                    alt="vietnam"
+                                /><br />베트남
+                            </div>
+                        </div>
+                        <!-- If we need pagination -->
+                        <div
+                            class="swiper-pagination"
+                            style="position: static"
+                        ></div>
+                    </div>
+                </div>
+
+                <!-- 내가 쓴 글 목록 -->
+                <div id="posts-area" class="area-box">
+                    <h4 class="titles">
+                        Posts<img
+                            src="{% static 'image/icon/post.svg' %}"
+                            class="title-icon"
+                        />
+                    </h4>
+                    <hr />
+
+                    {% for post in request.user.post_set.all %}
+                    <a href="{% url 'savior:community_detail' post.id %}"
+                        ><div class="post-box">
+                            <div class="post-info-top">
+                                <p>{{ post.created|date:"Y년 m월 d일 H:i" }}</p>
+                            </div>
+                            <div class="post-info-main">
+                                <p id="post-title">{{ post.title }}</p>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+
+                <!-- 내가 쓴 댓글 목록 -->
+                <div id="comments-area" class="area-box">
+                    <h4 class="titles">
+                        Comments<img
+                            src="{% static 'image/icon/comment.svg' %}"
+                            class="title-icon"
+                        />
+                    </h4>
+                    <hr />
+
+                    {% for comment in request.user.comment_set.all %}
+                    <a
+                        href="{% url 'savior:community_detail' comment.post.id %}"
+                    >
+                        <div class="comment-box">
+                            <div class="comment-info-top">
+                                <p>
+                                    {{comment.created|date:"Y년 m월 d일 H:i" }}
+                                </p>
+                            </div>
+                            <div class="comment-info-main">
+                                <p id="comment-title">{{ comment.content }}</p>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                    <br />
+                    {% else %}
+                    <span>먼저 로그인 해주세요 </span><br />
+
+                    <!--* 로그아웃 버튼 -->
+                    <a href="{% url 'savior:accounts:login' %}">로그인</a
+                    ><br /><br /><br />
+                    {% endif %}
+                    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+                    <script src="./js/mypage.js"></script>
+                    <script src="./js/go-back.js"></script>
+                    <script src="./js/go-back-nonclick.js"></script>
+                </div>
+            </section>
+            <navigation class="nav">
+                <a href="{% url 'savior:exchange' %}"
+                    ><img src="{% static 'image/nav/money.svg' %}"
+                /></a>
+                <a href="#"><img src="{% static 'image/nav/eat.png' %}" /></a>
+                <a href="#"
+                    ><img
+                        src="{% static 'image/nav/pin_color.png' %}"
+                        style="height: 45px"
+                /></a>
+                <a href="{% url 'savior:pricelist' %}"
+                    ><img src="{% static 'image/nav/tag_color.png' %}"
+                /></a>
+                <a href="{% url 'savior:community' %}"
+                    ><img src="{% static 'image/nav/edit-message.png' %}"
+                /></a>
+            </navigation>
+        </div>
+
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="{% static 'js/mypage.js' %}"></script>
+        <script src="{% static 'js/go-back.js' %}"></script>
+        <script src="{% static 'js/go-back-nonclick.js' %}"></script>
+        {% endblock %}
     </body>
 </html>

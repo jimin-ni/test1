@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-# from .views import kakao_login, kakao_login_callback
+from .views import kakao_login, kakao_login_callback
 
 app_name = "users"
 
@@ -14,4 +14,5 @@ urlpatterns = [
         views.kakao_login_callback,
         name="kakao-callback",
     ),
+    
 ]
