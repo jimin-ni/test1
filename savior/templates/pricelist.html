@@ -28,7 +28,7 @@
           <img src="{% static 'image/savior.png' %}" />
         </div>
         <div class="hd-profile">
-          <a href=""> <img src="{% static 'image/nav/user_color.png' %}" /></a>
+          <a href="{% url 'savior:mypage' %}"> <img src="{% static 'image/nav/user_color.png' %}" /></a>
         </div>
       </header>
 
@@ -44,29 +44,21 @@
             <!-- changeCountry -->
             {% csrf_token %}
             <select name="country" id="input-dropdown">
-              <option
-                selected
-                disabled
-                value="{% static 'image/icon/selected.png' %}"
-              >
-                나라 선택
-              </option>
-              <option value="{% static 'image/icon/yen.png' %}" value2="Japan">
+              <option selected disabled value="">나라 선택</option>
+              <option value="Japan">
+                <img src="{% static 'image/icon/yen.png' %}" alt="Japan" />
                 Japan
               </option>
-              <option
-                value="{% static 'image/icon/dollar.png' %}"
-                value2="America"
-              >
-                America
+              <option value="USA">
+                <img src="{% static 'image/icon/dollar.png' %}" alt="USA" />
+                USA
               </option>
-              <option
-                value="{% static 'image/icon/dong.png' %}"
-                value2="Vietnam"
-              >
+              <option value="Vietnam">
+                <img src="{% static 'image/icon/dong.png' %}" alt="Vietnam" />
                 Vietnam
               </option>
             </select>
+            
             <input type="submit" value="선택" id="submit_btn" />
           </div>
         </form>
@@ -106,15 +98,11 @@
       </section>
 
       <navigation class="nav">
-        <a href="#"><img src="{% static 'image/nav/money.svg' %}" /></a>
+        <a href="{% url 'savior:exchange' %}"><img src="{% static 'image/nav/money.svg' %}" /></a>
         <a href="#"><img src="{% static 'image/nav/eat.png' %}" /></a>
-        <a href="#"
-          ><img
-            src="{% static 'image/nav/pin_color.png' %}"
-            style="height: 45px"
-        /></a>
-        <a href="#"><img src="{% static 'image/nav/tag_color.png' %}" /></a>
-        <a href="#"><img src="{% static 'image/nav/edit-message.png' %}" /></a>
+        <a href="{% url 'savior:map' %}"><img src="{% static 'image/nav/pin_color.png' %}" style="height: 45px"/></a>
+        <a href="{% url 'savior:pricelist' %}"><img src="{% static 'image/nav/tag_color.png' %}" /></a>
+        <a href="{% url 'savior:community' %}"><img src="{% static 'image/nav/edit-message.png' %}" /></a>
       </navigation>
     </div>
     <script src="{% static 'js/modal_country.js' %}"></script>
