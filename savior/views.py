@@ -34,7 +34,7 @@ def pricelist(request):
             return redirect('savior:USA_pricelist')
         else:
             return redirect('savior:vietnam_pricelist')
-    return render(request, 'japan_pricelist.html')
+    return render(request, 'pricelist.html')
 
 def usa_pricelist(request):
     return render(request, 'USA_pricelist.html')
@@ -46,8 +46,8 @@ def vietnam_pricelist(request):
     return render(request, 'vietnam_pricelist.html')
 
 #nav바 환율 선택 페이지
-def exchange(request):
-    return render(request, 'exchange.html')
+# def exchange(request):
+#     return render(request, 'exchange.html')
 
 
 #일본 상세페이지
@@ -205,7 +205,7 @@ def exchange(request):
             return redirect('savior:USA_exchange')
         else:
             return redirect('savior:vietnam_exchange')
-    return render(request, 'japan_exchange.html')
+    return render(request, 'exchange.html')
 
 def get_exchange_rate1():
     headers = {
