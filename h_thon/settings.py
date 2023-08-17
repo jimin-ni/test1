@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'accounts',
     'admin_thumbnails',
     'rest_framework',
+    
 ]
 
 MIDDLEWARE = [

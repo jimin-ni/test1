@@ -141,7 +141,23 @@ p {
 /* section */
 .sec {
     height: calc(100vh - 58px - 66px - 53px);
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+.sec::-webkit-scrollbar {
+    width: 12px; /* 스크롤바의 너비 */
+}
+
+.sec::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #7f6044; /* 스크롤바의 색상 */
+    border-radius: 10px;
+}
+
+.sec::-webkit-scrollbar-track {
+    background: #ccb89d; /*스크롤바 뒷 배경 색상*/
+    border-radius: 10px;
 }
 
 /* content */
