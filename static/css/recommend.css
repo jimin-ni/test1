@@ -197,11 +197,37 @@ p {
   margin-left: 10px;
 }
 
-.choice {
-  padding-top: 10px;
-  padding-bottom: 10px;
+#input {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: end;
+  margin-right: 2vw;
+}
+
+#input-unit {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: end;
+  margin-bottom: 1vh;
+  font-family: "Judson";
+}
+
+#input-dropdown {
+  height: 40px;
+  margin: 0;
+  outline: 0;
+  border: 1.5px solid #000;
+  background-color: #ede1d1;
+  padding: 6px;
+  border-radius: 25px;
+  font-family: "Judson";
+  /* text-align: center; */
+}
+
+.choose {
+  margin-left: 30px;
+  margin-top: 30px;
 }
 
 /*식당추천박스*/

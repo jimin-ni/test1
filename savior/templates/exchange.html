@@ -55,7 +55,7 @@
                             <option value="vietnam">Vietnam</option>
                             
                         </select>
-                        <input type="submit" value="선택" />
+                        <input type="submit" value="선택" id="choose-btn"/>
                     </form>
                                                                 
                 </div>
@@ -142,6 +142,7 @@
             const modal_wrap = document.querySelector(".modal_wrap");
 const modal_background = document.querySelector(".modal_background");
 
+
 function close() {
   modal_wrap.classList.remove("show-modal");
   modal_background.classList.remove("show-modal");
@@ -150,6 +151,12 @@ function open() {
   modal_wrap.classList.add("show-modal");
   modal_background.classList.add("show-modal");
 }
+
+//드롭다운 클릭 시 선택 버튼 opacity 변경
+document.querySelector('#input-dropdown').addEventListener("click", () => {
+    console.log('opacity 수정하기~');
+    document.getElementById('choose-btn').style.opacity="1.0";
+});
 
 //모달창 보여주는 이벤트 리스너
 
