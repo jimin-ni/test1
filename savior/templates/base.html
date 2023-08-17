@@ -20,13 +20,7 @@
     <div class="container">
       <div class="background"></div>
       <header class="hd">
-        <div class="hd-back">
-          <img
-            src="{% static 'image/nav/back.svg' %}"
-            style="height: 30px"
-            onclick="goBack()"
-          />
-        </div>
+        <div class="hd-back">{% block back %} {%endblock %}</div>
         <div class="hd-logo">
           <img src="{% static 'image/savior.png' %}" />
         </div>
