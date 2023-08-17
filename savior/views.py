@@ -45,6 +45,11 @@ def japan_pricelist(request):
 def vietnam_pricelist(request):
     return render(request, 'vietnam_pricelist.html')
 
+#nav바 환율 선택 페이지
+def exchange(request):
+    return render(request, 'exchange.html')
+
+
 #일본 상세페이지
 def japan(request):
     exchange_rate = get_exchange_rate1()
