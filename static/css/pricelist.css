@@ -138,7 +138,7 @@ p {
 /* section */
 .sec {
   height: calc(100vh - 58px - 66px - 53px);
-  overflow-y: visible;
+  overflow-y: auto;
 }
 
 .sec::-webkit-scrollbar {
@@ -193,6 +193,7 @@ p {
 
 .buttons > span {
   margin-bottom: 10px;
+  color: white;
 }
 
 .pricebtn {
@@ -319,4 +320,22 @@ p {
   font-weight: bold;
 
   padding: 0 20px;
+}
+
+/*a태그 색상화이트*/
+a:link {
+  color: white;
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+  text-decoration: underline;
+}
+a:active {
+  color: white;
+  text-decoration: none;
 }
