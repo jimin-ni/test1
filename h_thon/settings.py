@@ -16,8 +16,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # secrets.json 파일에 넣었음
 
 
-#* secrets 파일 불러오기
-secret_file = os.path.join(BASE_DIR, 'secrets.json')
+#* secrets 파일 불러오기 - 배포 오류로 secrets.json 내용을 settings 파일에 명시 
+# secret_file = os.path.join(BASE_DIR, 'secrets.json') 
+SECRET_KEY = "django-insecure-57^tohc!v_cbvfwndk#!)=t-9)1)cd40!@1^i69z3%#@28%(=y"
+EMAIL_HOST_USER="saviorservice2023@gmail.com",
+EMAIL_HOST_PASSWORD="rackvwohuuubvqns"
+
+
 
 #* You're accessing the development server over HTTPS, but it only supports HTTP. 오류 해결
 if socket.gethostname()=="Raouf-PC":
